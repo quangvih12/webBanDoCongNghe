@@ -1,0 +1,206 @@
+<div class="container">
+    <div class="form-cart" style="width: 1296px ;   margin-top: 180px;">
+
+        <section class="talbe" id="table">
+            <h1 style="text-align: center">GIỎ HÀNG</h1>
+            <table class="table table-strip mt-3" style="    margin-top: 30px;    margin-bottom: 160px">
+                <thead>
+                <tr style="background-color: #f0f0f0;    font-size: 1.4rem;">
+                    <td>
+                        <input type="checkbox" id="checkboxs" name="id" value="0"/>
+                    </td>
+                    <td>STT</td>
+                    <td>Hình ảnh</td>
+                    <td>Tên sản phẩm</td>
+                    <td>số lượng</td>
+                    <td>ngày tạo</td>
+                    <td>Đơn giá</td>
+                    <td>Tổng tiền</td>
+                    <td colspan="2">thao tác</td>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr style="   font-size: 1.4rem;" ng-repeat="gh in gioHang" id="cart-r">
+                    <td>
+                        <input type="checkbox" id="checkbox" name="id"
+                               ng-click="saveCheckbox(gh.chiTietSP.id,gh.soLuong)"/>
+                    </td>
+                    <td>{{$index+1}}</td>
+
+                    <td>
+                        <img src="{{gh.chiTietSP.hinhAnh}}" alt="" class="anh" style="width: 100px"/>
+                    </td>
+                    <td>{{gh.chiTietSP.sanPham.ten}}</td>
+                    <td>
+                        <a class="btn btn-primary" style="background: #000000b3" ng-click="truSoLuong(gh.id,gh.soLuong)"><i class="bi bi-arrow-down"></i></a>
+                        <input ng-value="gh.soLuong"  class="soLuong"
+                               style="width: 50px; border: 1px solid #D6D6D6;text-align: center;" disabled="true"/>
+                        <a class="btn btn-primary" style="background: #000000b3" ng-click="congSoLuong(gh.id,gh.soLuong)"><i class="bi bi-arrow-up"></i></a>
+                    </td>
+                    <td>{{gh.ngayTao}}</td>
+
+                    <td>{{gh.chiTietSP.giaBan}}</td>
+                    <td><span id="money"> {{gh.chiTietSP.giaBan * gh.soLuong}}</span> <sup>đ</sup>
+                    </td>
+                    <td><i class="bi bi-x" ng-click="delete(gh.id)" style="    font-size: 2.3rem;margin-left: 15px;"></i></td>
+                </tr>
+
+                <tr class="none" style="background: #f0f0f0; border-color: #f0f0f0">
+                    <td colspan="9" class="mgg"
+                        style="height: 35px; text-align: right; padding-right: 10px">
+                        Mã giảm giá &nbsp;
+                        <input type="text" name="magiamgia" value="" class="magiamgia"/>
+                        <input type="button" name="btn_magiamgia" value="Đồng ý" class="btn_magiamgia"/>
+
+                        <p class="tbsaima"></p>
+                    </td>
+                </tr>
+
+                <tr style="background: #f0f0f0; border-color: #f0f0f0;font-size: 1.3rem;">
+                    <td colspan="9" style="height: 35px; text-align: right; padding-right: 10px">
+                        Tổng thanh toán:
+                        <span id="tongthanhtoan"> </span>&nbsp;<sup>đ</sup>
+                    </td>
+                </tr>
+                <tr style="background: #f0f0f0; border-color: #f0f0f0;font-size: 1.3rem;">
+                    <td colspan="9" style="height: 35px; text-align: right; padding-right: 10px">
+                        <button class=""
+                                style="width: 86px;height: 31px;font-size: 1.4rem;color: white;background: #000000b3;"
+                                ng-click="chuyenPhanTu('right_gh')">
+                            Thanh Toán
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </section>
+        <section class="right_gh" id="right_gh">
+            <!-- <div class="td_gh">Thông tin khách hàng</div> -->
+            <div class="row">
+                <div class="col-6 frm_lienhe">
+                    <form method="post" name="frm_order" id="frm_order" action="" enctype="multipart/form-data">
+                        <div class="item_lienhe">
+                            <p class="no" style="font-size: 1.4rem;">Hình thức thanh toán:<span>*</span></p>
+                            <select name="httt" id="httt" style="font-size: 1.3rem;" ng-model="phuongThucTT">
+                                <option value="1">Chọn hình thức thanh toán</option>
+                                <option value="1">COD</option>
+                                <option value="2">COD</option>
+                            </select>
+                        </div>
+
+                        <div class="item_lienhe">
+                            <p class="no">Họ và tên:<span>*</span></p>
+                            <input name="hoten" type="text" id="hoten" value="" style="font-size: 1.3rem;"
+                                   ng-model="tenNguoiNhan"/>
+                        </div>
+
+                        <div class="item_lienhe">
+                            <p class="no">Điện thoại:<span>*</span></p>
+                            <input name="dienthoai" id="dienthoai" value="" type="text" ng-model="sdt"
+                                   style="font-size: 1.3rem;"/>
+                        </div>
+
+                        <div class="item_lienhe" style="font-size: 1.3rem;">
+                            <p class="no">Địa chỉ:<span>*</span></p>
+                            <input name="diachi" type="text" id="diachi" value="" ng-model="diaChi"
+                                   style="font-size: 1.3rem;"/>
+                        </div>
+
+                        <div class="item_lienhe" style="font-size: 1.3rem;" ng-model="ghiChu">
+                            <p class="no">Ghi chú:</p>
+                            <textarea name="noidung" cols="50" rows="4"
+                                      style="font-size: 1.3rem; border: 1px solid #D6D6D6;background: #F7F7F7"></textarea>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="col-6 dsphiship">
+                    <h3 style="font-size: 1.4rem;    margin-top: 12px">Nơi vận chuyển</h3>
+                    <label style="font-size: 1.4rem;" class="dsphiship-lb">
+                        <input type="radio" name="phiship" class="phiship" value="30000"/>
+                        Đan Phượng, Gia Lâm, Đông Anh, Chương Mỹ, Hoài Đức
+                    </label>
+                    <br/>
+                    <label style="font-size: 1.4rem;    margin-top: 20px" class="dsphiship-lb">
+                        <input type="radio" name="phiship" class="phiship" value="40000"/>
+                        Ba Vì, Mỹ Đức, Phúc Thọ, Thạch Thất, Quốc Oai, Thanh Trì, Thường Tín, Thanh Oai
+                    </label>
+                    <br/>
+                    <label style="font-size: 1.4rem;    margin-top: 20px" class="dsphiship-lb">
+                        <input type="radio" name="phiship" class="phiship" value="50000"/>
+                        Mê Linh, Sóc Sơn và Ứng Hòa
+                    </label>
+                    <br/>
+                    <label style="font-size: 1.4rem;    margin-top: 20px" class="dsphiship-lb">
+                        <input type="radio" name="phiship" class="phiship" value=""/>
+                        Các tỉnh thành ngoài Hà Nội
+                    </label>
+                    <br/>
+                </div>
+
+                <!--            onclick="window.location.href='.'"-->
+                <div style="text-align: center; height: 77px; width: 1296px" class="buton">
+                    <input class="btn button click_ajax" type="button" value="Tiếp tục mua hàng"
+                           ng-click="vePhanTu(table)" style="
+              border: 1px solid #000;
+              color: #000;
+              background: #fff;
+              padding: 6px 25px;
+              border-radius: 0;
+              font-size: 1.4rem;
+            "/>
+
+                    <input title="Đặt hàng" ng-click="save()" type="button" class="click_ajaxgiohang" value="Đặt hàng"
+                           style="
+              background: #000;
+              color: #fff;
+              border: 1px solid#000;
+              padding: 6px 25px;
+              border-radius: 0;
+              margin-left: 12px;
+                font-size: 1.4rem;
+            "/>
+                </div>
+            </div>
+
+        </section>
+
+
+    </div>
+
+</div>
+<div class="modal" id="delete-gioHang" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+     aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" style="height: 150px;width: 410px;">
+        <div class="modal-content">
+            <div class="modal-body">
+                <p>Số lượng sản phẩm phải lớn hơn 0</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                        onclick="window.location.href='/view'">Close
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="modal_thanhToan" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+     aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" style="height: 150px;width: 410px;">
+        <div class="modal-content">
+            <div class="modal-body">
+                <p style="font-size: 1.4rem">Thanh toán thành công</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                        onclick="window.location.href='.'">Close
+                </button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                        onclick="window.location.href='#gioHang'">Xem hóa đơn
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

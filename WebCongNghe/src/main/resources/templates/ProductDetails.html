@@ -1,0 +1,115 @@
+<div class="warper">
+    <div class="container">
+        <div class="contentvs">
+            <div class="row" style="    width: 100%;">
+                <div class="col-6">
+                    <div id="carouselExampleRide" class="carousel slide" data-bs-ride="true">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img src="{{sps.hinhAnh}}" class="d-block w-100" alt="..."/>
+
+                            </div>
+                            <div class="carousel-item">
+                                <img
+                                        src="{{sps.hinhAnh}}"
+                                        class="d-block w-100"
+                                        alt="..."
+                                />
+
+                            </div>
+                        </div>
+                        <button
+                                class="carousel-control-prev"
+                                type="button"
+                                data-bs-target="#carouselExampleRide"
+                                data-bs-slide="prev"
+                        >
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button
+                                class="carousel-control-next"
+                                type="button"
+                                data-bs-target="#carouselExampleRide"
+                                data-bs-slide="next"
+                        >
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                </div>
+                <!--.zoom_slick-->
+                <div class="col-6">
+                    <ul class="product_info">
+                        <li class="ten">{{sps.sanPham.ten}}</li>
+
+                        <li>
+                            <p class="gia">
+                                <b>{{sps.giaBan | currency:''}}</b>
+                            </p>
+                        </li>
+
+                        <li>
+                            <span class="size">M</span><span class="size">L</span><span class="size">XL</span>
+                        </li>
+
+                        <li>
+                    <span class="mausac" data-id="#000000" style="
+                  background: rgb(0, 0, 0);
+                  --darkreader-inline-bgimage: initial;
+                  --darkreader-inline-bgcolor: #000000;
+                " data-darkreader-inline-bgimage="" data-darkreader-inline-bgcolor=""></span>
+                            <div class="clear"></div>
+                        </li>
+                        <li>
+                            <div class="cover_soluong">
+                                <input type="number" value="1" class="soluong" name="soluong" ng-model="soLuong"/>
+                                <a class="dathang btn-addcart" data-id="1032" data-bs-toggle="modal"
+                                   data-bs-target="#add-San-Pham">ADD TO CART</a>
+                            </div>
+
+                        </li>
+
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--// modal add vao gio hang-->
+<div class="modal" id="add-San-Pham" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+     aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" style="height: 150px;width: 410px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Modal title</h5>
+            </div>
+            <div class="modal-body">
+                <p>thêm thành công</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" ng-click="createGioHangCT(sps.id)">Save Cart</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--// modal so luong > 0 vao gio hang-->
+<div class="modal" id="modal_sanP" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+     aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" style="height: 150px;width: 410px;">
+        <div class="modal-content">
+            <div class="modal-body">
+                <p>Số lượng sản phẩm phải lớn hơn 0</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+

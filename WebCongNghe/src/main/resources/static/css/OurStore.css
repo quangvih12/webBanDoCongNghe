@@ -1,0 +1,713 @@
+:root {
+    --bg-color: #0b1419;
+    --second-bg-color: #323946;
+    --text-color: #fff;
+    --main-color: #192832;
+}
+
+.home-ourStore {
+    width: 100%;
+    margin-top: 175px;
+    text-align: center;
+    font-size: 1rem;
+}
+
+.ourStore-sp {
+    height: 1600px;
+    background: #c7c7c5;
+    margin-top: 15px;
+}
+
+.shop-Categories {
+    margin-top: 20px;
+    width: 100%;
+    height: 200px;
+    background: var(--text-color);
+    border-radius: 1rem;
+}
+
+.shop-Categories p {
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding: 15px 0px 0px 20px;
+}
+
+.shop-Categories ul li {
+    display: block;
+    padding: 15px 0px 0px 0px;
+}
+
+.shop-Categories ul li a {
+    color: #989a9b;
+    font-size: 1.3rem;
+}
+
+.fiter-by {
+    margin-top: 15px;
+    width: 100%;
+    height: 730px;
+    background: var(--text-color);
+    border-radius: 1rem;
+}
+
+.product-tag {
+    margin-top: 15px;
+    width: 100%;
+    height: 160px;
+    background: var(--text-color);
+    border-radius: 1rem;
+}
+
+.product-ramdom {
+    margin-top: 20px;
+    width: 100%;
+    height: 325px;
+    background: var(--text-color);
+    border-radius: 1rem;
+}
+
+.fiter-by p {
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding: 15px 0px 0px 20px;
+}
+
+.availablity p {
+    font-size: 1.3rem;
+    font-weight: bold;
+    padding: 15px 0px 0px 25px;
+}
+
+.availablity .form-check {
+    padding: 10px 0px 0px 40px;
+    font-size: 1.2rem;
+}
+
+.availablity .form-check .form-check-input {
+    width: 15px;
+    height: 15px;
+    margin-right: 10px;
+}
+
+.price-p {
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding: 15px 0px 0px 20px;
+}
+
+.Price {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.Price .mb-3 label {
+    font-size: 1.3rem;
+}
+
+.Price .mb-3 input {
+    width: 110px;
+    height: 30px;
+    background: #ecece8;
+    margin-right: 10px;
+}
+
+.color .row {
+    display: inline-flex;
+    margin-left: 20px;
+}
+
+.size-p {
+    margin-top: 10px;
+}
+
+.size .form-check {
+    padding: 10px 0px 0px 40px;
+    font-size: 1.2rem;
+}
+
+.size .form-check .form-check-input {
+    width: 15px;
+    height: 15px;
+    margin-right: 10px;
+}
+
+.size .form-check label {
+    color: #989a9b;
+}
+
+.availablity .form-check label {
+    color: #989a9b;
+}
+
+.circle {
+    background: #000000;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    margin-right: 15px;
+    margin-top: 15px;
+}
+
+.circle-DimGray {
+    background: #696969;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    margin-right: 15px;
+    margin-top: 15px;
+}
+
+.circle-Gray {
+    background: #bebebe;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    margin-right: 15px;
+    margin-top: 15px;
+}
+
+.circle-LightSlateGray {
+    background: #778899;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    margin-right: 15px;
+    margin-top: 15px;
+}
+
+.circle-SlateGray {
+    background: #708090;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    margin-right: 15px;
+    margin-top: 15px;
+}
+
+.circle-LavenderBlush3 {
+    background: #cdc1c5;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    margin-right: 15px;
+    margin-top: 15px;
+}
+
+.circle-DarkSlateGray2 {
+    background: #8deeee;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    margin-right: 15px;
+    margin-top: 15px;
+}
+
+.circle-PaleGoldenrod {
+    background: #eee8aa;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    margin-right: 15px;
+    margin-top: 15px;
+}
+
+.circle-SaddleBrown {
+    background: #8b4513;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    margin-right: 15px;
+    margin-top: 15px;
+}
+
+.circle-DarkSlateBlue {
+    background: #483d8b;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    margin-right: 15px;
+    margin-top: 15px;
+}
+
+.circle-Blue1 {
+    background: #0000ff;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    margin-right: 15px;
+    margin-top: 15px;
+}
+
+.circle-RoyalBlue1 {
+    background: #4876ff;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    margin-right: 15px;
+    margin-top: 15px;
+}
+
+.circle-SlateBlue1 {
+    background: #836fff;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    margin-right: 15px;
+    margin-top: 15px;
+}
+
+.circle-PowderBlue {
+    background: #b0e0e6;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    margin-right: 15px;
+    margin-top: 15px;
+}
+
+.circle-SaddleBrown {
+    background: #8b4513;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    margin-right: 15px;
+    margin-top: 15px;
+}
+
+.circle-SeaGreen1 {
+    background: #54ff9f;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    margin-right: 15px;
+    margin-top: 15px;
+}
+
+.circle-SeaGreen2 {
+    background: #4eee94;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    margin-right: 15px;
+    margin-top: 15px;
+}
+
+.circle-PaleGreen {
+    background: #98fb98;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    margin-right: 15px;
+    margin-top: 15px;
+}
+
+.circle-RosyBrown1 {
+    background: #ffc1c1;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    margin-right: 15px;
+    margin-top: 15px;
+}
+
+.circle-IndianRed {
+    background: #cd5c5c;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    margin-right: 15px;
+    margin-top: 15px;
+}
+
+.circle-IndianRed1 {
+    background: #ff6a6a;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    margin-right: 15px;
+    margin-top: 15px;
+}
+
+.circle-IndianRed4 {
+    background: #8b3a3a;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    margin-right: 15px;
+    margin-top: 15px;
+}
+
+.circle-Sienna1 {
+    background: #ff8247;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    margin-right: 15px;
+    margin-top: 15px;
+}
+
+.circle-Sienna3 {
+    background: #cd6839;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    margin-right: 15px;
+    margin-top: 15px;
+}
+
+.circle-Burlywood {
+    background: #deb887;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    margin-right: 15px;
+    margin-top: 15px;
+}
+
+.circle-Burlywood1 {
+    background: #ffd39b;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    margin-right: 15px;
+    margin-top: 15px;
+}
+
+.circle-Wheat {
+    background: #f5deb3;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    margin-right: 15px;
+    margin-top: 15px;
+}
+
+.circle-Wheat3 {
+    background: #cdba96;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    margin-right: 15px;
+    margin-top: 15px;
+}
+
+.circle-Tan1 {
+    background: #ffa54f;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    margin-right: 15px;
+    margin-top: 15px;
+}
+
+.circle-Tan3 {
+    background: #cd853f;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    margin-right: 15px;
+    margin-top: 15px;
+}
+
+.circle-Firebrick1 {
+    background: #ff3030;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    margin-right: 15px;
+    margin-top: 15px;
+}
+
+.circle-Firebrick4 {
+    background: #8b1a1a;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    margin-right: 15px;
+    margin-top: 15px;
+}
+
+.circle-Orange1 {
+    background: #ffa500;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    margin-right: 15px;
+    margin-top: 15px;
+}
+
+.circle-Orange3 {
+    background: #cd8500;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    margin-right: 15px;
+    margin-top: 15px;
+}
+
+.circle-DarkOrange3 {
+    background: #cd6600;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    margin-right: 15px;
+    margin-top: 15px;
+}
+
+.circle-Pink {
+    background: #ffc0cb;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    margin-right: 15px;
+    margin-top: 15px;
+}
+
+.circle-DarkOrange2 {
+    background: #98fb98;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    margin-right: 15px;
+    margin-top: 15px;
+}
+
+.circle-DeepPink1 {
+    background: #ff1493;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    margin-right: 15px;
+    margin-top: 15px;
+}
+
+.circle-DeepPink2 {
+    background: #ee1289;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    margin-right: 15px;
+    margin-top: 15px;
+}
+
+.product-tag .product-tag-name {
+    width: 70px;
+    height: 20px;
+    background: #dbe4e7;
+    border-radius: 1rem;
+
+    margin-left: 10px;
+    margin-top: 20px;
+}
+
+.product-tag .product-tag-p {
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding: 15px 0px 0px 20px;
+}
+
+.product-tag .product-tag-name p {
+    text-align: center;
+    font-size: 1rem;
+    color: #504f4f;
+    margin-top: 0.3rem;
+}
+
+.product-ramdom-p {
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding: 15px 0px 0px 20px;
+}
+
+.product-ramdom-img img {
+    width: 70px;
+    height: 80px;
+    margin-left: 20px;
+}
+
+.product-ramdom-s {
+    display: flex;
+    margin-top: 35px;
+}
+
+.product-ramdom-a {
+    margin-left: 10px;
+}
+
+.product-ramdom-a a {
+    font-size: 1.3rem;
+    text-decoration: none;
+    color: var(--bg-color);
+    font-weight: bold;
+}
+
+.product-ramdom-a h6 {
+    font-size: 1.4rem;
+    color: var(--bg-color);
+    font-weight: bold;
+}
+
+.product-ramdom-a ul {
+    list-style: none;
+    display: flex;
+    justify-content: flex-start;
+    padding-top: 0;
+    padding-left: 0;
+}
+
+.product-ramdom-a ul li {
+    padding-top: 5px;
+}
+
+.product-ramdom-a ul li .bi {
+    font-size: 1rem;
+    transition: 0.4s;
+    margin: 6px;
+    color: #f5f249;
+}
+
+.product-ramdom-a ul li .bi:hover {
+    transform: scale(1.3);
+    transition: 0.6s;
+}
+
+.sort {
+    width: 100%;
+    height: 50px;
+    background-color: var(--text-color);
+    margin-top: 20px;
+    border-radius: 1rem;
+    display: flex;
+}
+
+.sort p {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin: 14px 10px 0px 10px;
+}
+
+.dropdowna {
+    z-index: 0;
+}
+
+.sort .dropdown-toggle {
+    background: #ecece8;
+    margin-top: 8px;
+    height: 35px;
+    width: 150px;
+    font-size: 1.2rem;
+    z-index: 50;
+}
+
+.sort .menu2 {
+    width: 150px;
+    height: 150px;
+}
+
+.pages {
+    width: 100%;
+    height: 50px;
+    background-color: var(--text-color);
+    margin-top: 27px;
+    border-radius: 1rem;
+    display: flex;
+    justify-content: center;
+}
+
+.dropdowna-img {
+    margin-left: 542px;
+}
+
+.dropdowna-img a img {
+    width: 20px;
+    height: 20px;
+    margin: 14px;
+}
+
+.contents h3 {
+    font-size: 1.5rem;
+    margin: 0;
+    padding: 10px;
+    color: red;
+}
+
+.contents {
+    box-sizing: border-box;
+    float: left;
+    width: 100%;
+    border-radius: 20px;
+    cursor: pointer;
+    padding: 10px;
+    height: 315px;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgb(0, 0, 0, 0.22);
+    transition: 0.4s;
+    background: var(--text-color);
+    margin-top: 20px;
+}
+
+.contents:hover {
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgb(0, 0, 0, 0.23);
+    transform: translate(0px, -8px);
+}
+
+.contents img {
+    width: 150px;
+    height: 150px;
+    text-align: center;
+    margin: 0 auto;
+    display: block;
+}
+
+.contents p {
+    padding: 0 8px;
+    font-size: 1rem;
+    color: #0b1419;
+}
+
+.contents h6 {
+    font-size: 2rem;
+    text-align: center;
+    margin: 0;
+    color: #0b1419;
+}
+
+.contents ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    padding-top: 0;
+    padding-left: 0;
+}
+
+.contents ul li {
+    padding-top: 5px;
+}
+
+.contents ul li .bi {
+    font-size: 1.5rem;
+    transition: 0.4s;
+    margin: 6px;
+    color: #f8f41a;
+}
+
+.contents ul li .bi:hover {
+    transform: scale(1.3);
+    transition: 0.6s;
+}
+
+.pages button {
+    width: 30px;
+    height: 30px;
+    margin-top: 10px;
+}
+
+.pages p {
+    font-size: 1.3rem;
+    margin: 10px 30px 0 30px;
+}
+
+.dropdowna form {
+    display: flex;
+}
+

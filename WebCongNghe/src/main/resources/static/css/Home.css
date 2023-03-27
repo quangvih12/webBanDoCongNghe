@@ -1,0 +1,608 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    border: none;
+    outline: none;
+    scroll-behavior: smooth;
+    font-family: "Poppins", sans-serif;
+    font-family: UTMAvo;
+}
+
+:root {
+    --bg-color: #0b1419;
+    --second-bg-color: #323946;
+    --text-color: #fff;
+    --main-color: #192832;
+}
+
+.carousel {
+    width: 645px;
+    margin-top: 215px;
+    z-index: 0;
+}
+
+.carousel-inner {
+    border-radius: 1.5rem;
+}
+
+.carousel-item {
+    position: relative;
+}
+
+.carousel-item .to {
+    position: absolute;
+    top: 70px;
+    left: 50px;
+}
+
+.carousel-item .to h5 {
+    color: red;
+    font-size: 1.5rem;
+}
+
+.carousel-item .to h3 {
+    font-size: 4.5rem;
+    font-weight: bold;
+}
+
+.carousel-item .to p {
+    font-size: 1.3rem;
+    margin: 10px 0 10px 0;
+}
+
+.carousel-item .to button {
+    width: 100px;
+    height: 40px;
+    border-radius: 2rem;
+    background: var(--bg-color);
+    color: var(--text-color);
+    margin-top: 30px;
+}
+
+.MenuSanPham {
+    width: 313px;
+    height: 210px;
+    background: #92b5c2;
+    border-radius: 1.5rem;
+    position: relative;
+}
+
+.MenuSanPham img {
+    width: 100%;
+    height: 100%;
+    border-radius: 1.5rem;
+}
+
+.MenuSanPham2 {
+    width: 313px;
+    height: 210px;
+    background: #c4b7ac;
+    border-radius: 1.5rem;
+    position: relative;
+}
+
+.MenuSanPham2 img {
+    width: 100%;
+    height: 100%;
+    border-radius: 1.5rem;
+}
+
+.MenuSanPham3 {
+    width: 313px;
+    height: 207px;
+    background: #9fbbb4;
+    margin-top: 10px;
+    border-radius: 1.5rem;
+    position: relative;
+}
+
+.MenuSanPham3 img {
+    width: 100%;
+    height: 100%;
+    border-radius: 1.5rem;
+}
+
+.MenuSanPham4 {
+    width: 313px;
+    height: 207px;
+    background: #c2b4b3;
+    margin-top: 10px;
+    border-radius: 1.5rem;
+    position: relative;
+}
+
+.MenuSanPham4 img {
+    width: 100%;
+    height: 100%;
+    border-radius: 1.5rem;
+}
+
+.MenuSanPham .todo {
+    position: absolute;
+    top: 50px;
+    left: 20px;
+}
+
+.MenuSanPham .todo h5 {
+    color: red;
+    font-size: 1rem;
+}
+
+.MenuSanPham .todo h3 {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.MenuSanPham .todo p {
+    font-size: 1rem;
+    margin-top: 15px;
+}
+
+.MenuSanPham2 .todo {
+    position: absolute;
+    top: 50px;
+    left: 20px;
+}
+
+.MenuSanPham2 .todo h5 {
+    color: red;
+    font-size: 1rem;
+}
+
+.MenuSanPham2 .todo h3 {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.MenuSanPham2.todo p {
+    font-size: 1rem;
+    margin-top: 15px;
+}
+
+.MenuSanPham3 .todo {
+    position: absolute;
+    top: 50px;
+    left: 20px;
+}
+
+.MenuSanPham3 .todo h5 {
+    color: red;
+    font-size: 1rem;
+}
+
+.MenuSanPham3 .todo h3 {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.MenuSanPham3 .todo p {
+    font-size: 1rem;
+    margin-top: 15px;
+}
+
+.MenuSanPham4 .todo {
+    position: absolute;
+    top: 50px;
+    left: 20px;
+}
+
+.MenuSanPham4 .todo h5 {
+    color: red;
+    font-size: 1rem;
+}
+
+.MenuSanPham4 .todo h3 {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.MenuSanPham4 .todo p {
+    font-size: 1rem;
+    margin-top: 15px;
+}
+
+.out {
+    margin-top: 215px;
+}
+
+.meet {
+    background: #c7c7c5;
+    width: 100%;
+    height: 3300px;
+    margin-top: 100px;
+}
+
+.icon {
+    width: 1296px;
+    height: 100px;
+    background: #c7c7c5;
+    padding: 6px;
+    margin: 50px 0px;
+    margin-top: 100px;
+}
+
+.iconto {
+    margin: 60px 60px;
+    padding: 0px 60px;
+}
+
+.icon .icon1 {
+    width: 70px;
+    height: 70px;
+
+    float: left;
+}
+
+.icon .qwe {
+    width: 200px;
+    height: 80px;
+
+    float: left;
+}
+
+img.con1 {
+    width: 100%;
+    height: 100%;
+}
+
+.icon2 .iconto .icon1 img.bbbb {
+    width: 100%;
+    height: 100%;
+}
+
+.icon3 .iconto .icon1 img.ggg {
+    width: 100%;
+    height: 100%;
+}
+
+.icon4 .iconto .icon1 img.jj {
+    width: 100%;
+    height: 100%;
+}
+
+.icon .qwe h5.o {
+    font-size: 14px;
+    margin: 20px;
+    margin-bottom: -10px;
+    margin-top: -7px;
+}
+
+.icon .qwe p.p {
+    font-size: 12px;
+    margin: 20px;
+}
+
+.catogorys {
+    height: 220px;
+    border-radius: 1rem;
+    background: var(--text-color);
+    box-shadow: 0 0 4px var(--main-color);
+}
+
+.catogorys-sp {
+    display: flex;
+    justify-content: center;
+}
+
+.catogorys-sp .catogorys-a {
+    margin-top: 30px;
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.items {
+    color: #b6b4b4;
+
+    font-size: 1rem;
+}
+
+.catogorys-sp .catogorys-a a {
+    text-decoration: none;
+    color: #0b1419;
+}
+
+.content h3 {
+    font-size: 1.5rem;
+    margin: 0;
+    padding: 10px;
+    color: red;
+    white-space: pre-wrap;
+}
+
+.content {
+    box-sizing: border-box;
+    float: left;
+    width: 100%;
+    border-radius: 20px;
+    cursor: pointer;
+    padding: 10px 6.5px;
+    /*box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgb(0, 0, 0, 0.22);*/
+    transition: 0.4s;
+    background: var(--text-color);
+    height: 100%;
+
+}
+
+.content:hover {
+    /*box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgb(0, 0, 0, 0.23);*/
+    transform: translate(0px, -8px);
+}
+
+.content img {
+    width: 190px;
+    height: 190px;
+    text-align: center;
+    margin: 0 auto;
+    display: block;
+}
+
+.content p {
+    padding: 0 8px;
+    font-size: 1rem;
+    white-space: pre-wrap;
+    color: #0b1419;
+}
+
+.content h6 {
+    font-size: 2rem;
+    text-align: center;
+    margin: 0;
+    color: #0b1419;
+}
+
+.content ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    padding-top: 0;
+    padding-left: 0;
+}
+
+.content ul li {
+    padding-top: 5px;
+}
+
+.content ul li .bi {
+    font-size: 1.5rem;
+    transition: 0.4s;
+    margin: 6px;
+    color: #f8f41a;
+}
+
+.content ul li .bi:hover {
+    transform: scale(1.3);
+    transition: 0.6s;
+}
+
+.listSanPham-p {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin: 50px 0 20px 0;
+}
+
+.motSp {
+    margin-top: 100px;
+}
+
+.motSps {
+    background: black;
+    height: 370px;
+    border-radius: 2rem;
+}
+
+.motSps .motSps-a {
+    padding: 30px;
+}
+
+.motSps .motSps-a p,
+a {
+    color: var(--text-color);
+    text-decoration: none;
+}
+
+.motSps .motSps-img img {
+    width: 250px;
+    height: 200px;
+    padding-left: 50px;
+}
+
+.motSps .motSps-a p {
+    font-size: 1rem;
+}
+
+.motSps .motSps-a a {
+    font-size: 2.2rem;
+}
+
+.motSps2 {
+    background: var(--text-color);
+    height: 370px;
+    border-radius: 2rem;
+}
+
+.motSps2 .motSps-aa {
+    padding: 30px;
+}
+
+.motSps2 .motSps-aa p,
+a {
+    text-decoration: none;
+}
+.content h3{
+    font-size: 1.4rem;
+    text-decoration: none;
+    color: red;
+    white-space: pre-line;
+
+}
+.motSps2 .motSps-img img {
+    width: 250px;
+    height: 200px;
+    padding-left: 50px;
+}
+
+.motSps2 .motSps-aa p {
+    font-size: 1rem;
+}
+
+.motSps2 .motSps-aa a {
+    font-size: 2.2rem;
+    color: var(--bg-color);
+}
+
+.chiTietSps {
+    background: var(--text-color);
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    border-radius: 1rem;
+    padding: 25px 10px 0px 0px;
+    margin-bottom: 20px;
+}
+
+.chiTietSps img {
+    height: 160px;
+}
+
+.chiTietSp-a {
+    margin-left: 8px;
+}
+
+.chiTietSps .chiTietSp-a h4 {
+    color: red;
+    font-size: 1.4rem;
+}
+
+.chiTietSps .chiTietSp-a h3 {
+    font-size: 1.7rem;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.chiTietSps .chiTietSp-a ul {
+    display: flex;
+
+    list-style: none;
+    margin-left: 0;
+    margin-top: 10px;
+}
+
+.chiTietSps .chiTietSp-a ul li .bi {
+    font-size: 1.2rem;
+    transition: 0.4s;
+    margin: 6px;
+    color: #f8f41a;
+}
+
+.content ul li .bi:hover {
+    transform: scale(1.3);
+    transition: 0.6s;
+}
+
+.chiTietSps .chiTietSp-a .momney {
+    color: red;
+    font-weight: bold;
+    font-size: 1.5rem;
+    margin-top: 5px;
+}
+
+.chiTietSp-a-span p {
+    color: var(--second-bg-color);
+}
+
+.chiTietSp-a-span p span {
+    font-weight: bold;
+    color: var(--bg-color);
+}
+
+.chiTietSp-a button {
+    background: var(--bg-color);
+    width: 100px;
+    height: 30px;
+    color: var(--text-color);
+    border-radius: 2rem;
+    margin: 10px 0 0 0;
+}
+
+.progress {
+    height: 6px;
+}
+
+.img-io {
+    display: flex;
+}
+
+.tst {
+    margin-left: 10px;
+}
+
+.tst img {
+    width: 87px;
+    height: 83px;
+}
+
+.Popular-sanPhams-content {
+    box-sizing: border-box;
+    float: left;
+    width: 100%;
+    height: 350px;
+    border-radius: 20px;
+    cursor: pointer;
+    padding: 10px;
+    margin-top: 10px;
+    transition: 0.4s;
+    background: var(--text-color);
+}
+
+.Popular-sanPhams-content .content-v1 {
+    display: flex;
+}
+
+.Popular-sanPhams-content .content-v1 img {
+    width: 50px;
+    height: 50px;
+    margin-right: 30px;
+}
+
+.Popular-sanPhams-content .content-v1 a {
+    margin-top: 20px;
+    color: var(--bg-color);
+    font-size: 1.3rem;
+}
+
+.hang {
+    width: 100%;
+    height: 160px;
+    background: var(--text-color);
+    border-radius: 1rem;
+    margin-top: 100px;
+}
+
+.hang img {
+    width: 130px;
+    height: 130px;
+    margin: 10px 30px 0 24px;
+}
+
+.our-latest {
+    margin-top: 100px;
+}
+
+.bin-t {
+    overflow-x: scroll; /* Thêm thanh cuộn ngang */
+    white-space: nowrap; /* Ngăn các nội dung chuyển hàng */
+    width: 1100px;
+    display: flex;
+    height: 400px;
+}
+
+.colt {
+    width: 220px;
+    height: 367px;
+    margin-right: 15px;
+    margin-top: 10px;
+}
+

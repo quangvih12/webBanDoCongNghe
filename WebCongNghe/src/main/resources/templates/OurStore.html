@@ -1,0 +1,303 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div class="home-ourStore">
+    <h3>Home / our store</h3>
+</div>
+
+<div class="ourStore-sp">
+    <div class="container">
+        <div class="row">
+            <div class="col-3">
+                <div class="shop-Categories">
+                    <p>Shop By Categories</p>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#ourStore">our store</a></li>
+                        <li><a href="">Blogs</a></li>
+                        <li><a href="">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="fiter-by">
+                    <p>Filter By</p>
+                    <div class="availablity">
+                        <p>Availablity</p>
+                        <div class="form-check">
+                            <input
+                                    class="form-check-input"
+                                    type="checkbox"
+                                    value=""
+                                    id="flexCheckDefault"
+                            />
+                            <label class="form-check-label" for="flexCheckDefault">
+                                In stock
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input
+                                    class="form-check-input"
+                                    type="checkbox"
+                                    value=""
+                                    id="flexChckChecked"
+                                    checked
+                            />
+                            <label class="form-check-label">
+                                out of stock
+                            </label>
+                        </div>
+                    </div>
+                    <p class="price-p">Price</p>
+                    <div class="Price">
+                        <div class="mb-3">
+                            <label class="form-label"
+                            >$
+                            </label>
+                            <input placeholder="From" name="from" ng-model="from"/>
+
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label"
+                            >$
+                            </label>
+                            <input placeholder="To" name="to" ng-model="to"/>
+
+                        </div>
+                        <button ng-click="searchPrice()" style="width: 30px;height: 30px; background:#ffc107 ">
+                            <i class="bi bi-search"></i>
+                        </button>
+                    </div>
+                    <div class="error" style="height: 20px; width: 100%;">
+                        <span style="color: #8b1a1a;font-size: 1.3rem;  margin-left: 80px ">{{errorFrom}}</span>
+                    </div>
+
+                    <div class="color">
+                        <p class="color">Color</p>
+                        <div class="row">
+                            <button class="circle-Black"></button>
+                            <button class="circle-DimGray"></button>
+                            <button class="circle-Gray"></button>
+                            <button class="circle-LightSlateGray"></button>
+                            <button class="circle-SlateGray"></button>
+                            <button class="circle-LavenderBlush3"></button>
+                            <button class="circle-DarkSlateGray2"></button>
+                            <button class="circle-PaleGoldenrod"></button>
+                            <button class="circle-SaddleBrown"></button>
+                            <button class="circle-DarkSlateBlue"></button>
+                            <button class="circle-Blue1"></button>
+                            <button class="circle-RoyalBlue1"></button>
+                            <button class="circle-SlateBlue1"></button>
+                            <button class="circle-PowderBlue"></button>
+                            <button class="circle-SaddleBrown"></button>
+                            <button class="circle-SeaGreen1"></button>
+                            <button class="circle-SeaGreen2"></button>
+                            <button class="circle-PaleGreen"></button>
+                            <button class="circle-RosyBrown1"></button>
+                            <button class="circle-IndianRed"></button>
+                            <button class="circle-IndianRed1"></button>
+                            <button class="circle-IndianRed4"></button>
+                            <button class="circle-Sienna1"></button>
+                            <button class="circle-Sienna3"></button>
+                            <button class="circle-Burlywood"></button>
+                            <button class="circle-Burlywood1"></button>
+                            <button class="circle-Wheat"></button>
+                            <button class="circle-Wheat3"></button>
+                            <button class="circle-Tan1"></button>
+                            <button class="circle-Tan3"></button>
+                            <button class="circle-Firebrick1"></button>
+                            <button class="circle-Firebrick4"></button>
+                            <button class="circle-Orange1"></button>
+                            <button class="circle-Orange3"></button>
+                            <button class="circle-DarkOrange3"></button>
+                            <button class="circle-Pink"></button>
+                            <button class="circle-DarkOrange2"></button>
+                            <button class="circle-DeepPink1"></button>
+                            <button class="circle-DeepPink2"></button>
+                            <button class="circle"></button>
+                        </div>
+                    </div>
+                    <div class="size">
+                        <p class="size-p">Size</p>
+                        <div class="form-check">
+                            <input
+                                    class="form-check-input"
+                                    type="checkbox"
+                                    value=""
+
+                            />
+                            <label class="form-check-label">
+                                S(10)
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input
+                                    class="form-check-input"
+                                    type="checkbox"
+                                    value=""
+
+                            />
+                            <label class="form-check-label">
+                                M(10)
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input
+                                    class="form-check-input"
+                                    type="checkbox"
+                                    value=""
+
+                            />
+                            <label class="form-check-label">
+                                L(10)
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input
+                                    class="form-check-input"
+                                    type="checkbox"
+                                    value=""
+
+                            />
+                            <label class="form-check-label">
+                                XL(10)
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input
+                                    class="form-check-input"
+                                    type="checkbox"
+                                    value=""
+
+                            />
+                            <label class="form-check-label">
+                                XXL(10)
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-tag">
+                    <p class="product-tag-p">Product Tag</p>
+                    <div class="row">
+                        <div class="product-tag-name">
+                            <p>Headphones</p>
+                        </div>
+                        <div class="product-tag-name"><p>LapTop</p></div>
+                        <div class="product-tag-name"><p>Mbile</p></div>
+                        <div class="product-tag-name"><p>Oppo</p></div>
+                        <div class="product-tag-name"><p>Vivo</p></div>
+                        <div class="product-tag-name"><p>Speaker</p></div>
+                    </div>
+                </div>
+                <div class="product-ramdom">
+                    <p class="product-ramdom-p">Ramdom Products</p>
+
+                    <div class="product-ramdom-s">
+                        <div class="product-ramdom-img">
+                            <img src="../img/iphone.png" alt=""/>
+                        </div>
+                        <div class="product-ramdom-a">
+                            <a href=""
+                            >Lorem ipsum dolor sit amet consectetur adipisicing elit</a
+                            >
+
+                            <ul>
+                                <li><i class="bi bi-star-fill"></i></li>
+                                <li><i class="bi bi-star-fill"></i></li>
+                                <li><i class="bi bi-star-fill"></i></li>
+                                <li><i class="bi bi-star"></i></li>
+                                <li><i class="bi bi-star"></i></li>
+                            </ul>
+                            <h6>40.00</h6>
+                        </div>
+                    </div>
+                    <div class="product-ramdom-s">
+                        <div class="product-ramdom-img">
+                            <img src="../img/iphone.png" alt=""/>
+                        </div>
+                        <div class="product-ramdom-a">
+                            <a href=""
+                            >Lorem ipsum dolor sit amet consectetur adipisicing elit</a
+                            >
+
+                            <ul>
+                                <li><i class="bi bi-star-fill"></i></li>
+                                <li><i class="bi bi-star-fill"></i></li>
+                                <li><i class="bi bi-star-fill"></i></li>
+                                <li><i class="bi bi-star"></i></li>
+                                <li><i class="bi bi-star"></i></li>
+                            </ul>
+                            <h6>40.00</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-9">
+                <div class="sort">
+                    <p>Sort Price:</p>
+
+                    <div class="dropdowna">
+
+                        <div class="cols">
+                            <select ng-click="sortBy()"  name="sort_direction"  id="httt"  style=" font-size: 1.3rem;  margin-top: 10px;   width: 119px;" ng-model="sort">
+                                <option value="">Mặc định</option>
+                                <option value="asc">Tăng dần</option>
+                                <option value="desc">Giảm dần</option>
+                            </select>
+
+                        </div>
+
+                    </div>
+                    <form class="d-flex" role="search">
+                        <input id="myInput"
+                               class="form-control me-2"
+                               type="search"
+                               placeholder="Search"
+                               aria-label="Search"
+                               name="keyword"
+                               ng-model="keyword"
+
+                               style="width: 200px; margin-top: 10px; margin-left: 507px;"/>
+                        <button class="btn btn-outline-warning" ng-click="searchSanPham()"
+                                style="height: 40px;margin-top: 5px;"> Search
+                        </button>
+                    </form>
+
+                </div>
+                <div class="listProduct">
+                    <div class="row">
+
+                        <div class="col-3"
+                             ng-repeat="sp in sanPham | startFrom:currentPage*pageSize | limitTo:pageSize">
+                            <a href="#detail/{{sp.id}}">
+                                <div class="contents">
+                                    <img src="{{sp.hinhAnh}}" alt=""/>
+                                    <h3>{{sp.sanPham.ten}}</h3>
+                                    <p>{{sp.moTa}}</p>
+                                    <h6>{{sp.giaBan | currency:'' }}</h6>
+                                    <ul>
+                                        <li><i class="bi bi-star-fill"></i></li>
+                                        <li><i class="bi bi-star-fill"></i></li>
+                                        <li><i class="bi bi-star-fill"></i></li>
+                                        <li><i class="bi bi-star"></i></li>
+                                        <li><i class="bi bi-star"></i></li>
+                                    </ul>
+                                </div>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="pages">
+                    <!--                    <dir-pagination-controls></dir-pagination-controls>-->
+                    <button ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1">
+                        Previous
+                    </button>
+                    <p> {{currentPage+1}}/{{numberOfPages()}}</p>
+
+                    <button ng-disabled="currentPage >= sanPham.length/pageSize -1"
+                            ng-click="currentPage=currentPage+1">
+                        Next
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

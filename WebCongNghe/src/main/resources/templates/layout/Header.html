@@ -1,0 +1,179 @@
+<div class="headers">
+    <div class="header">
+        <p href="" class="logo">Free Shipping pver $100 & Free Returns</p>
+
+        <nav class="navbar">
+            <p class="logo">Hotline:(888) 4344 600-(888) 1338 8194</p>
+            <div class="main-g">
+                <div class="dropdown">
+                    <button
+                            class="btn btn-secondary dropdown-toggle"
+                            type="button"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
+                    >
+                        English
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu">
+                        <li>
+                            <a class="dropdown-item active" href="#"> English</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="#"> English</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="#"> English</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="main-Usd">
+                <div class="dropdown">
+                    <button
+                            class="btn btn-secondary dropdown-toggle"
+                            type="button"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
+                    >
+                        English
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu">
+                        <li>
+                            <a class="dropdown-item active" href="#"> English</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="#"> English</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="#"> English</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <div class="header-center">
+        <a href="" class="Logo">Alo</a>
+        <div ng-controller="searchOurStoreController">
+            <form class="d-flex" role="search">
+                <input id="myInput"
+                       class="form-control me-2"
+                       type="search"
+                       placeholder="Search"
+                       aria-label="Search"
+                       name="keyword"
+                       ng-model="keyword"
+
+                />
+                <button class="btn btn-outline-warning" ng-click="searchHeader()"> Search</button>
+            </form>
+        </div>
+        <!--        (keyup)="searchHeader()"-->
+        <i class="bi bi-list" id="menu-icon"></i>
+        <nav class="navbar" >
+
+            <div class="header-Favourite">
+                <div class="header-Favourite-i">
+                    <i class="bi bi-heart"></i>
+                </div>
+
+                <div class="header-Favourite-a">
+                    <a href="">Favourite Wishlist</a>
+                </div>
+            </div>
+            <div class="header-Favourite"  style="    display: flex;" >
+                <div class="header-Favourite-i">
+                    <i class="bi bi-person-circle" ></i>
+                </div>
+
+                <div class="header-Favourite-a">
+                    <div class="dropdown" style="    margin-top: 4px;font-size: 1.3rem;">
+                        <span  id="username"
+                                class=" dropdown-toggle"
+                                type="button"
+                                data-bs-toggle="dropdown"
+                                aria-expanded="false"
+                               style="color: white"
+                        >
+<!--                            log in My Account-->
+                        </span>
+                        <ul class="dropdown-menu dropdown-menu">
+                            <li>
+                                <a class="dropdown-item active" href="/login"> login</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#"> English</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="/logout"> logout</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="header-Favourite">
+
+          <span>
+              <a class="sp_cart_top">
+                <i class="bi bi-cart4" id="cart-icon" style="margin-right: 10px"></i>
+              <span id="span-SlSanPham">0</span>
+              </a>
+ <span style="color: white; font-size: 1.4rem ">$<span style="color: white; font-size: 1.2rem;margin-left: 2px;" id="span-tutal"></span></span>
+            </span>
+
+            </div>
+        </nav>
+    </div>
+
+    <div class="header-bottom">
+        <div class="dropdown">
+            <button
+                    class="btn dropdown-toggle"
+                    type="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+            >
+                SHOP CATEGORIES
+            </button>
+            <ul class="dropdown-menu menu2">
+                <li><a class="dropdown-item" href="#">Fresh Meat</a></li>
+                <li><a class="dropdown-item" href="#">Vegetables</a></li>
+                <li><a class="dropdown-item" href="#">Fuit&Nut Gifts</a></li>
+                <li><a class="dropdown-item" href="#">Ocean Foods</a></li>
+                <li><a class="dropdown-item" href="#">Butter & Eggs</a></li>
+                <li><a class="dropdown-item" href="#">Fastfood</a></li>
+                <li><a class="dropdown-item" href="#">Fesh Onion</a></li>
+                <li><a class="dropdown-item" href="#">Papayaya & Crisps</a></li>
+                <li><a class="dropdown-item" href="#">Oatmeal</a></li>
+                <li><a class="dropdown-item" href="#">Fresh Bananas</a></li>
+                <li><a class="dropdown-item" href="#">Fresh Beris</a></li>
+            </ul>
+        </div>
+        <nav class="navbarr-s">
+            <a href="#home">HOME</a>
+            <a href="#ourStore">OUR STORE</a>
+            <a href="#bill">BLOGS</a>
+            <a href="">CONTACT</a>
+        </nav>
+    </div>
+
+    <div class="cart">
+        <h2 class="cart-title">Your Cart</h2>
+
+        <div class="cart-content" id="cart-content">
+
+        </div>
+        <div class="total">
+            <div class="total-title">total:$</div>
+            <div class="total-price" id="total-price"></div>
+        </div>
+        <a type="button" class="btn-buy" href="#gioHang"
+           style="float: left;height: 43px;text-align: center;width: 112px; margin-left: 110px;">VIEW CART</a>
+
+
+        <i class="bi bi-x-lg" id="close-cart"></i>
+    </div>
+</div>
