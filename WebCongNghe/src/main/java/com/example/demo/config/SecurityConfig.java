@@ -43,7 +43,8 @@ public class SecurityConfig {
                         "/js/**", "/css/**",
                         "/img/**",
                         "/api/product/**",
-                        "/api/gioHang/**"
+                        "/api/gioHang/**",
+                        "/api/hoaDon/**"
                       )
                 .permitAll()
                 .anyRequest()

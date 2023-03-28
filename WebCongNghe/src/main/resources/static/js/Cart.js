@@ -45,13 +45,27 @@ window.gioHangController = function ($scope, $http) {
         });
     }
 
-    // luu id san pham vao session
-    $scope.saveCheckbox = function (idsp, sluong) {
-        $http.post("http://localhost:8080/api/gioHang/save-checkbox" + "?idSanPham=" + idsp
-        ).then(function (response) {
 
+    $scope.getDetails = function(idsp) {
+        angular.forEach($scope.gioHang, function(item) {
+            // console.log(item.isChecked)
+            if (item.isChecked) {
+                // luu id san pham vao session
+                    $http.post("http://localhost:8080/api/hoaDon/save-checkbox" + "?idSanPham=" + idsp
+                    ).then(function (response) {
+                    });
+                // console.log('ok');
+            }else if(item.isChecked === false){
+                console.log('bug')
+                // remove id san pham vao session
+                    $http.post("http://localhost:8080/api/hoaDon/remove-checkbox" + "?idSanPham=" + idsp
+                    ).then(function (response) {
+                    });
+            }else{
+                console.log('bug bug')
+            }
         });
-    }
+    };
 
     $scope.delete = function (id) {
         $http.delete("http://localhost:8080/api/gioHang/delete/" + id,
@@ -60,7 +74,7 @@ window.gioHangController = function ($scope, $http) {
         });
     }
 
-    //cong so luong
+//cong so luong
     $scope.congSoLuong = function (id, soLuong) {
         $http.put("http://localhost:8080/api/gioHang/gioHangs/" + id, {
                 soLuong: soLuong

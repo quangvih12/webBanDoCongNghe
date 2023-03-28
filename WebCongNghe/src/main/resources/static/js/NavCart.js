@@ -40,7 +40,7 @@ function loadData() {
                     usernameElement.textContent = '  log in My Account';
                 } else if (usernameElement !== null) {
                     usernameElement.textContent = username;
-                    console.log(usernameElement.textContent)
+                    // console.log(usernameElement.textContent)
                 } else {
                     console.log('bug bug bug')
                 }

@@ -13,11 +13,13 @@ public interface BillDetailService {
 
     ResponseEntity<List<hoaDonChiTiet>> getAll();
 
-    ResponseEntity<hoaDonChiTiet> getTutorialById( Integer id);
+    ResponseEntity<hoaDonChiTiet> getTutorialById(Integer id);
 
-    String saveCheckbox( Integer idSanPham, HttpSession session);
+    String saveCheckbox(Integer idSanPham, HttpSession session);
 
-    ResponseEntity<hoaDonChiTiet> createHoaDonCT( BigDecimal TongTienHoaDon, HoaDon _hoaDon);
+    String removeCheckbox(Integer idSanPham, HttpSession session);
+
+    ResponseEntity<hoaDonChiTiet> createHoaDonCT(BigDecimal TongTienHoaDon, HoaDon _hoaDon);
 
     void get();
 

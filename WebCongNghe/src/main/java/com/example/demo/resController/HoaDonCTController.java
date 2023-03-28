@@ -19,7 +19,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/hoaDon")
 public class HoaDonCTController {
 
     @Autowired
@@ -27,14 +27,14 @@ public class HoaDonCTController {
 
 
     // get all hoa don chi tiet
-    @GetMapping("/hoaDon")
+    @GetMapping()
     public ResponseEntity<List<hoaDonChiTiet>> getAll() {
         return billService.getAll();
 
     }
 
     // tim kiem theo id
-    @GetMapping("/hoaDon/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<hoaDonChiTiet> getBillById(@PathVariable("id") Integer id) {
         return billService.getTutorialById(id);
     }
@@ -43,6 +43,12 @@ public class HoaDonCTController {
     @PostMapping("/save-checkbox")
     public String saveCheckbox(@RequestParam("idSanPham") Integer idSanPham, HttpSession session) {
         return billService.saveCheckbox(idSanPham, session);
+    }
+
+    // luu idsp vao session
+    @PostMapping("/remove-checkbox")
+    public String removeCheckbox(@RequestParam("idSanPham") Integer idSanPham, HttpSession session) {
+        return billService.removeCheckbox(idSanPham, session);
     }
 
     // test luu session

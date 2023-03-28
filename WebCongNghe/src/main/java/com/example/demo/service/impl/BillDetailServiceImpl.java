@@ -80,6 +80,17 @@ public class BillDetailServiceImpl implements BillDetailService {
     }
 
     @Override
+    public String removeCheckbox(Integer idSanPham, HttpSession session) {
+        session.setAttribute("idSanPham", idSanPham);
+
+        // add tam thoi id san pham vao list
+        lsitIdSanPhamSession.remove(idSanPham);
+        System.out.println("remove"+idSanPham);
+
+        return "";
+    }
+
+    @Override
     // test luu session
     public void get() {
         for (Integer i : lsitIdSanPhamSession) {
