@@ -1,7 +1,7 @@
 package com.example.demo.service.impl;
 
 
-import com.example.demo.responstory.TokenRepository;
+import com.example.demo.reponstory.TokenRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;

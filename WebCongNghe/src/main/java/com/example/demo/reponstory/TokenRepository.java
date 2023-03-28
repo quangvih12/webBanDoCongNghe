@@ -1,4 +1,4 @@
-package com.example.demo.responstory;
+package com.example.demo.reponstory;
 
 import com.example.demo.entity.Token;
 import org.springframework.data.jpa.repository.JpaRepository;

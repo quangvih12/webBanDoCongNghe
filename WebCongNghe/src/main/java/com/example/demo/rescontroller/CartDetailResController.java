@@ -1,8 +1,7 @@
-package com.example.demo.resController;
+package com.example.demo.rescontroller;
 
 
 import com.example.demo.entity.GioHangChiTiet;
-import com.example.demo.service.CartDetailService;
 import com.example.demo.service.impl.CartDetailServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,7 +21,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/gioHang")
-public class GioHangCTController {
+public class CartDetailResController {
     @Autowired
     private  CartDetailServiceImpl cartDetailService;
 
@@ -40,7 +39,7 @@ public class GioHangCTController {
     }
 
     // xoa khoi gio hang theo id
-    @DeleteMapping("/gioHang/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<HttpStatus> deleteGioHangCT(@PathVariable("id") Integer id) {
         return cartDetailService.deleteGioHangCT(id);
     }

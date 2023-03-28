@@ -19,19 +19,15 @@ function loadData() {
             document.getElementById('span-SlSanPham').textContent = responseData.length;
 
             $("#cart-content").html(responseData.map(function (item) {
-                //tutal
-                let giaBan = item.chiTietSP.giaBan;
-                let soLuong = item.soLuong;
-
-                let tutal = parseInt(giaBan) * parseInt(soLuong);
-
-
-                for (var i = 0; i <= responseData.length; i++) {
-                    tutal += tutal;
+                let tutals = 0;
+                for (var i = 0; i < responseData.length; i++) {
+                    let tutal = responseData[i].soLuong * responseData[i].donGia;
+                    tutals += tutal;
                 }
 
-                document.getElementById('total-price').textContent = tutal;
-                document.getElementById('span-tutal').textContent = tutal;
+
+                document.getElementById('total-price').textContent = tutals;
+                document.getElementById('span-tutal').textContent = tutals;
 
                 // lay ra ten trong sesion sau dó add do header
                 const username = sessionStorage.getItem('ten');
@@ -74,7 +70,7 @@ function Remove(sanPhamId) {
     $.ajax({
         type: "DELETE",
         contentType: "application/json",
-        url: APII + "/gioHang/" + sanPhamId,
+        url: APII + "/" + sanPhamId,
         data: JSON.stringify(sanPhamId),
         dataType: 'json',
         success: function () {

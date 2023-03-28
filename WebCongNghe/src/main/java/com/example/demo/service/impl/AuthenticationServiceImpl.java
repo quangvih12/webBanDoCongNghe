@@ -7,8 +7,8 @@ import com.example.demo.entity.KhachHang;
 import com.example.demo.entity.Role;
 import com.example.demo.entity.Token;
 import com.example.demo.entity.TokenType;
-import com.example.demo.responstory.KhachHangResponsitory;
-import com.example.demo.responstory.TokenRepository;
+import com.example.demo.reponstory.KhachHangReponsitory;
+import com.example.demo.reponstory.TokenRepository;
 import com.example.demo.service.AuthenticationService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -17,13 +17,10 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Service
 @RequiredArgsConstructor
 public class AuthenticationServiceImpl implements AuthenticationService {
-    private final KhachHangResponsitory repository;
+    private final KhachHangReponsitory repository;
     private final TokenRepository tokenRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtServiceImpl jwtService;

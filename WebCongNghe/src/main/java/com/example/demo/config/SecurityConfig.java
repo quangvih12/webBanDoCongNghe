@@ -44,7 +44,8 @@ public class SecurityConfig {
                         "/img/**",
                         "/api/product/**",
                         "/api/gioHang/**",
-                        "/api/hoaDon/**"
+                        "/api/hoaDon/**",
+                        "/api/hoaDonD/**"
                       )
                 .permitAll()
                 .anyRequest()

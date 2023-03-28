@@ -1,4 +1,4 @@
-package com.example.demo.resController;
+package com.example.demo.rescontroller;
 
 
 import com.example.demo.entity.ChiTietSanPham;
@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/product")
-public class SanPhamController {
+public class ProductResController {
     @Autowired
     private ProductSeviceImpl productSevice;
 

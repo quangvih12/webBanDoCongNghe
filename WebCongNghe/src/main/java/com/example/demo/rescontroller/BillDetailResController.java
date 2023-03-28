@@ -1,4 +1,4 @@
-package com.example.demo.resController;
+package com.example.demo.rescontroller;
 
 
 import com.example.demo.entity.HoaDon;
@@ -20,7 +20,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/hoaDon")
-public class HoaDonCTController {
+public class BillDetailResController {
 
     @Autowired
     private BillDetailServiceImpl billService;

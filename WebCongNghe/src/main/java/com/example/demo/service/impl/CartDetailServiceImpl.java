@@ -3,8 +3,8 @@ package com.example.demo.service.impl;
 import com.example.demo.entity.GioHang;
 import com.example.demo.entity.GioHangChiTiet;
 import com.example.demo.entity.KhachHang;
-import com.example.demo.responstory.CartDetailResponsitory;
-import com.example.demo.responstory.CartResponsitory;
+import com.example.demo.reponstory.CartDetailReponsitory;
+import com.example.demo.reponstory.CartReponsitory;
 import com.example.demo.service.CartDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,10 +19,10 @@ import java.util.Optional;
 public class CartDetailServiceImpl implements CartDetailService {
 
     @Autowired
-    private CartDetailResponsitory gioHangCTRespon;
+    private CartDetailReponsitory gioHangCTRespon;
 
     @Autowired
-    private CartResponsitory gioHangRespon;
+    private CartReponsitory gioHangRespon;
 
     @Autowired
     private AuthenticationServiceImpl authenticationService;

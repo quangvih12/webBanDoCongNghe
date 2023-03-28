@@ -1,7 +1,7 @@
 package com.example.demo.Authentication;
 
 
-import com.example.demo.responstory.TokenRepository;
+import com.example.demo.reponstory.TokenRepository;
 import com.example.demo.service.impl.JwtServiceImpl;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

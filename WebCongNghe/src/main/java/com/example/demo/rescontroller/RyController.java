@@ -1,4 +1,4 @@
-package com.example.demo.resController;
+package com.example.demo.rescontroller;
 
 
 import org.springframework.web.bind.annotation.*;

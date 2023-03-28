@@ -1,6 +1,6 @@
 package com.example.demo.Authentication;
 
-import com.example.demo.responstory.KhachHangResponsitory;
+import com.example.demo.reponstory.KhachHangReponsitory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -20,7 +20,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @ComponentScan(basePackages = "com.example.demo")
 public class ApplicationConfig {
 
-    private final KhachHangResponsitory repository;
+    private final KhachHangReponsitory repository;
 
     @Bean
     public UserDetailsService userDetailsService() {

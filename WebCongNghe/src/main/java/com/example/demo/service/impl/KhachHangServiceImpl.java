@@ -1,11 +1,9 @@
 package com.example.demo.service.impl;
 
 import com.example.demo.entity.KhachHang;
-import com.example.demo.responstory.KhachHangResponsitory;
+import com.example.demo.reponstory.KhachHangReponsitory;
 import com.example.demo.service.KhachHangService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -14,7 +12,7 @@ import java.util.Optional;
 public class KhachHangServiceImpl implements KhachHangService {
 
     @Autowired
-    private KhachHangResponsitory khachHangResponsitory;
+    private KhachHangReponsitory khachHangResponsitory;
 
 
     @Override

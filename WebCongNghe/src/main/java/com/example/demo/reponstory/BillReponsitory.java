@@ -1,4 +1,4 @@
-package com.example.demo.responstory;
+package com.example.demo.reponstory;
 
 
 import com.example.demo.entity.HoaDon;
@@ -11,7 +11,7 @@ import java.util.List;
 
 
 @Repository
-public interface BillResponsitory extends JpaRepository<HoaDon, Integer> {
+public interface BillReponsitory extends JpaRepository<HoaDon, Integer> {
 
     @Query("Select pt from HoaDon pt where pt.khachHang.id=:id")
     public List<HoaDon> findAllByTen(Integer id);

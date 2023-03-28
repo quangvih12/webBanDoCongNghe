@@ -1,10 +1,9 @@
 package com.example.demo.service.impl;
 
 import com.example.demo.entity.HoaDon;
-import com.example.demo.entity.KhachHang;
 import com.example.demo.entity.hoaDonChiTiet;
-import com.example.demo.responstory.BillDetailResponsitory;
-import com.example.demo.responstory.BillResponsitory;
+import com.example.demo.reponstory.BillDetailReponsitory;
+import com.example.demo.reponstory.BillReponsitory;
 import com.example.demo.service.BillService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,10 +18,10 @@ import java.util.Optional;
 public class BillServiceImpl implements BillService {
 
     @Autowired
-    private BillResponsitory hoaDonRespon;
+    private BillReponsitory hoaDonRespon;
 
     @Autowired
-    private BillDetailResponsitory hoaDonCTRespon;
+    private BillDetailReponsitory hoaDonCTRespon;
 
     private AuthenticationServiceImpl authenticationService;
 

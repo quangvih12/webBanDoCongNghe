@@ -1,4 +1,4 @@
-package com.example.demo.responstory;
+package com.example.demo.reponstory;
 
 import com.example.demo.entity.ChiTietSanPham;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -10,7 +10,7 @@ import java.util.List;
 
 
 @Repository
-public interface ProductResponstory extends JpaRepository<ChiTietSanPham, Integer> {
+public interface ProductReponstory extends JpaRepository<ChiTietSanPham, Integer> {
 
     @Query(value ="Select pt from ChiTietSanPham pt  where pt.sanPham.ten like :keyword or pt.sanPham.ma like :keyword")
     List<ChiTietSanPham> findAllBySanphamTen(String keyword);

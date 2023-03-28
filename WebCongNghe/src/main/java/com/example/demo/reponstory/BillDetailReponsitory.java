@@ -1,4 +1,4 @@
-package com.example.demo.responstory;
+package com.example.demo.reponstory;
 
 
 import com.example.demo.entity.hoaDonChiTiet;
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface BillDetailResponsitory extends JpaRepository<hoaDonChiTiet, Integer> {
+public interface BillDetailReponsitory extends JpaRepository<hoaDonChiTiet, Integer> {
 
     @Transactional
     @Modifying

@@ -1,4 +1,4 @@
-package com.example.demo.responstory;
+package com.example.demo.reponstory;
 
 
 import com.example.demo.entity.GioHangChiTiet;
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface CartDetailResponsitory extends JpaRepository<GioHangChiTiet, Integer> {
+public interface CartDetailReponsitory extends JpaRepository<GioHangChiTiet, Integer> {
 
     @Transactional
     @Modifying

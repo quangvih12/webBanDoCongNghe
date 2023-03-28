@@ -5,9 +5,9 @@ import com.example.demo.entity.GioHangChiTiet;
 import com.example.demo.entity.HoaDon;
 import com.example.demo.entity.KhachHang;
 import com.example.demo.entity.hoaDonChiTiet;
-import com.example.demo.responstory.BillDetailResponsitory;
-import com.example.demo.responstory.BillResponsitory;
-import com.example.demo.responstory.CartDetailResponsitory;
+import com.example.demo.reponstory.BillDetailReponsitory;
+import com.example.demo.reponstory.BillReponsitory;
+import com.example.demo.reponstory.CartDetailReponsitory;
 import com.example.demo.service.BillDetailService;
 import com.example.demo.util.DatetimeUtil;
 import jakarta.servlet.http.HttpSession;
@@ -24,13 +24,13 @@ import java.util.Optional;
 @Service
 public class BillDetailServiceImpl implements BillDetailService {
     @Autowired
-    private BillDetailResponsitory hoaDonCtRespon;
+    private BillDetailReponsitory hoaDonCtRespon;
 
     @Autowired
-    private BillResponsitory hoaDonRespon;
+    private BillReponsitory hoaDonRespon;
 
     @Autowired
-    private CartDetailResponsitory gioHangCTRespon;
+    private CartDetailReponsitory gioHangCTRespon;
 
     private AuthenticationServiceImpl authenticationService;
 

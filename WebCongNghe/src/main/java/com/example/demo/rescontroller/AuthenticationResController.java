@@ -1,4 +1,4 @@
-package com.example.demo.resController;
+package com.example.demo.rescontroller;
 
 import com.example.demo.request.AuthenticationRequest;
 import com.example.demo.request.AuthenticationResponse;
@@ -11,7 +11,6 @@ import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/v1/auth")
 @RequiredArgsConstructor
-public class AuthenticationController {
+public class AuthenticationResController {
 
     private final AuthenticationServiceImpl service;
     private final LogoutServiceImpl logoutService;

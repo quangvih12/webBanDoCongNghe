@@ -1,7 +1,7 @@
 package com.example.demo.service.impl;
 
 import com.example.demo.entity.ChiTietSanPham;
-import com.example.demo.responstory.ProductResponstory;
+import com.example.demo.reponstory.ProductReponstory;
 import com.example.demo.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -20,7 +20,7 @@ import java.util.Optional;
 public class ProductSeviceImpl implements ProductService {
 
     @Autowired
-    private ProductResponstory sanPhamResponstory;
+    private ProductReponstory sanPhamResponstory;
 
     @Override
     public ResponseEntity<List<ChiTietSanPham>> getAll(Integer page, Integer size, String nameSort) {
