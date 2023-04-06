@@ -18,8 +18,10 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class BillDetailServiceImpl implements BillDetailService {
@@ -35,6 +37,8 @@ public class BillDetailServiceImpl implements BillDetailService {
     private AuthenticationServiceImpl authenticationService;
 
     private DatetimeUtil datetimeUtil;
+
+    private Set<Integer> numberSet = new HashSet<>();
 
     // dung list de lay id san pham tu gio hang roi save vao hoa don chi tiet
     private List<Integer> lsitIdSanPhamSession = new ArrayList<>();
@@ -68,33 +72,40 @@ public class BillDetailServiceImpl implements BillDetailService {
     }
 
     @Override
-    // luu idsp vao session
-    public String saveCheckbox(Integer idSanPham, HttpSession session) {
-        session.setAttribute("idSanPham", idSanPham);
+    // luu idsp vao listIdSp
+    public String saveCheckbox(Integer idSanPham) {
 
-        // add tam thoi id san pham vao list
-        lsitIdSanPhamSession.add(idSanPham);
+    // add tam thoi id san pham vao hashSet
+        numberSet.add(idSanPham);
+        for (int number : lsitIdSanPhamSession) {
+            if (!numberSet.add(number)) {
+                // Nếu phát hiện số trùng lặp, loại bỏ nó khỏi danh sách
+                lsitIdSanPhamSession.remove((Integer) number);
+            }
+        }
+
+
         System.out.println(idSanPham);
 
         return "";
     }
 
     @Override
-    public String removeCheckbox(Integer idSanPham, HttpSession session) {
-        session.setAttribute("idSanPham", idSanPham);
-
-        // add tam thoi id san pham vao list
-        lsitIdSanPhamSession.remove(idSanPham);
-        System.out.println("remove"+idSanPham);
+    public String removeCheckbox(Integer idSanPham) {
+        // remove khoi hashSet
+        numberSet.remove(idSanPham);
+        System.out.println("remove" + idSanPham);
 
         return "";
     }
 
     @Override
-    // test luu session
+    // test luu idsp
     public void get() {
-        for (Integer i : lsitIdSanPhamSession) {
-            System.out.println(i);
+        System.out.println("-------------------");
+
+        for (Integer s : numberSet) {
+            System.out.println(s);
         }
     }
 
@@ -105,7 +116,7 @@ public class BillDetailServiceImpl implements BillDetailService {
             List<GioHangChiTiet> listGioHang = gioHangCTRespon.findAll();
             List<hoaDonChiTiet> listHoaDonCT = new ArrayList<>();
 
-            if (lsitIdSanPhamSession.isEmpty()) {
+            if (numberSet.isEmpty()) {
                 this.saveAll(TongTienHoaDon, _hoaDon, listGioHang, listHoaDonCT);
             } else {
                 this.saveTheoID(TongTienHoaDon, _hoaDon, listGioHang, listHoaDonCT);
@@ -167,8 +178,7 @@ public class BillDetailServiceImpl implements BillDetailService {
         HoaDon hoaDon = this.saveHoaDon(TongTienHoaDon, _hoaDon);
         hoaDon.setMa("HD" + hoaDon.getId());
         // lay id sp tu session roi save all
-        for (Integer i : lsitIdSanPhamSession) {
-            System.out.println(i);
+        for (Integer i : numberSet) {
             ChiTietSanPham ctSp = ChiTietSanPham.builder().id(i).build();
             GioHangChiTiet giohang = gioHangCTRespon.getBySoLuong(i);
             hoaDonChiTiet hd = new hoaDonChiTiet();
@@ -179,18 +189,23 @@ public class BillDetailServiceImpl implements BillDetailService {
             hd.setNgayTao(datetimeUtil.getCurrentDateAndTime());
             hd.setTrangthai(0);
             listHoaDonCT.add(hd);
-            System.out.println(giohang.getDonGia());
+
         }
 
         hoaDonCtRespon.saveAll(listHoaDonCT);
 
         //xoa sau khi them vao hoa don chi tiet thanh cong
         for (GioHangChiTiet o : listGioHang) {
-            for (Integer i : lsitIdSanPhamSession) {
+            for (Integer i : numberSet) {
                 if (o.getChiTietSP().getId() == i) {
                     gioHangCTRespon.delete(o);
                 }
+
+
             }
+            // remove idsp khoi set
+            numberSet.remove(o.getChiTietSP().getId());
         }
+
     }
 }

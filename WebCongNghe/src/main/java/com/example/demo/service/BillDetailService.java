@@ -15,9 +15,9 @@ public interface BillDetailService {
 
     ResponseEntity<hoaDonChiTiet> getTutorialById(Integer id);
 
-    String saveCheckbox(Integer idSanPham, HttpSession session);
+    String saveCheckbox(Integer idSanPham);
 
-    String removeCheckbox(Integer idSanPham, HttpSession session);
+    String removeCheckbox(Integer idSanPham);
 
     ResponseEntity<hoaDonChiTiet> createHoaDonCT(BigDecimal TongTienHoaDon, HoaDon _hoaDon);
 

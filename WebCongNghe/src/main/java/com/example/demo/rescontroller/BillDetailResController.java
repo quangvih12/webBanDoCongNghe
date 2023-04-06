@@ -41,14 +41,14 @@ public class BillDetailResController {
 
     // luu idsp vao session
     @PostMapping("/save-checkbox")
-    public String saveCheckbox(@RequestParam("idSanPham") Integer idSanPham, HttpSession session) {
-        return billService.saveCheckbox(idSanPham, session);
+    public String saveCheckbox(@RequestParam("idSanPham") Integer idSanPham) {
+        return billService.saveCheckbox(idSanPham);
     }
 
     // luu idsp vao session
     @PostMapping("/remove-checkbox")
-    public String removeCheckbox(@RequestParam("idSanPham") Integer idSanPham, HttpSession session) {
-        return billService.removeCheckbox(idSanPham, session);
+    public String removeCheckbox(@RequestParam("idSanPham") Integer idSanPham) {
+        return billService.removeCheckbox(idSanPham);
     }
 
     // test luu session

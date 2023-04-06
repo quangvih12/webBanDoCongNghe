@@ -4,7 +4,7 @@ window.gioHangController = function ($scope, $http) {
     $scope.gioHang = [];
 
     let tutals = 0;
-    let lenght = 0;
+    let tutal = 0;
     //getAll
     $http.get("http://localhost:8080/api/gioHang/getAll")
         .then(function (response) {
@@ -14,7 +14,7 @@ window.gioHangController = function ($scope, $http) {
 
                     tutals = 0;
                     for (var i = 0; i < response.data.length; i++) {
-                        let tutal = response.data[i].soLuong * response.data[i].donGia;
+                       tutal = response.data[i].soLuong * response.data[i].donGia;
                         tutals += tutal;
                     }
                     console.log(tutals)
@@ -28,7 +28,7 @@ window.gioHangController = function ($scope, $http) {
 
 //thanh toan
     $scope.save = function () {
-        $http.post("http://localhost:8080/api/hoaDon/createhoaDon" + "?TongTienHoaDon=" + tutal, {
+        $http.post("http://localhost:8080/api/hoaDon/createhoaDon" + "?TongTienHoaDon=" + tutals, {
                 tenNguoiNhan: $scope.tenNguoiNhan,
                 diaChi: $scope.diaChi,
                 sdt: $scope.sdt,
@@ -43,19 +43,19 @@ window.gioHangController = function ($scope, $http) {
         });
     }
 
-    $scope.isDisabled = true;
+
     $scope.getDetails = function (idsp) {
+        $scope.isDisabled = true;
         angular.forEach($scope.gioHang, function (item) {
+
             // console.log(item.isChecked)
-            if (item.isChecked) {
-                // luu id san pham vao session
+            if (item.isChecked === true) {
                 $http.post("http://localhost:8080/api/hoaDon/save-checkbox" + "?idSanPham=" + idsp
                 ).then(function (response) {
+
                 });
                 $scope.isDisabled = false;
-                // console.log('ok');
             } else if (item.isChecked === false) {
-                console.log('bug')
                 // remove id san pham vao session
                 $http.post("http://localhost:8080/api/hoaDon/remove-checkbox" + "?idSanPham=" + idsp
                 ).then(function (response) {
