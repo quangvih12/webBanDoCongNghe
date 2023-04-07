@@ -39,13 +39,13 @@ public class BillDetailResController {
         return billService.getTutorialById(id);
     }
 
-    // luu idsp vao session
+    // luu idsp vao hashSet
     @PostMapping("/save-checkbox")
     public String saveCheckbox(@RequestParam("idSanPham") Integer idSanPham) {
         return billService.saveCheckbox(idSanPham);
     }
 
-    // luu idsp vao session
+    // reomve idsp vao hashSet
     @PostMapping("/remove-checkbox")
     public String removeCheckbox(@RequestParam("idSanPham") Integer idSanPham) {
         return billService.removeCheckbox(idSanPham);

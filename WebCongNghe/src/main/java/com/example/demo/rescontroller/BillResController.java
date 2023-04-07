@@ -31,7 +31,6 @@ public class BillResController {
     @GetMapping("/{id}")
     public ResponseEntity<List<hoaDonChiTiet>> getAllHDCT(@PathVariable Integer id) {
         return billService.getAllHDCT(id);
-
     }
 
     @PutMapping("/{id}")

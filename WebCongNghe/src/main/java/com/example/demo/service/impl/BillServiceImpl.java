@@ -68,7 +68,7 @@ public class BillServiceImpl implements BillService {
         if (hoaDonData.isPresent()) {
             HoaDon _hoaDon = hoaDonData.get();
             _hoaDon.setTrangThaiTT(hoaDon.getTrangThaiTT());
-
+           hoaDonRespon.save(_hoaDon);
             return new ResponseEntity<>(hoaDonRespon.save(_hoaDon), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

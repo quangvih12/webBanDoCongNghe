@@ -29,7 +29,8 @@ window.billController = function ($scope, $http) {
         })
             .then(function (responseData) {
                     $scope.HoaDons = responseData.data;
-                    console.log( $scope.HoaDons)
+                    console.log('ok');
+                    window.open("#bill", '_self');
                 },
                 function (error) {
                     console.log(error);
