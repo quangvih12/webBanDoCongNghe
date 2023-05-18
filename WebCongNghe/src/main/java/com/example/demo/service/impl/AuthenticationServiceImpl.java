@@ -14,6 +14,7 @@ import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -44,17 +45,21 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 .build();
     }
 
+
     @Override
     public AuthenticationResponse authenticate(AuthenticationRequest request, HttpSession session) {
-        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
+        try {
+            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
+        } catch (AuthenticationException e) {
+            // Xử lý ngoại lệ đăng nhập không thành công
+            return AuthenticationResponse.builder().error("Thông tin đăng nhập không chính xác").build();
+        }
+
         var khachHang = repository.findByEmail(request.getEmail()).orElseThrow();
         var jwtToken = jwtService.generateToken(khachHang);
 
         // lay ra id khach hang
         currentLoginId = khachHang.getId();
-
-        // luu ten ng dung vao session
-        session.setAttribute("ten", khachHang.getTen());
 
         revokeAllUserTokens(khachHang);
         return AuthenticationResponse.builder()

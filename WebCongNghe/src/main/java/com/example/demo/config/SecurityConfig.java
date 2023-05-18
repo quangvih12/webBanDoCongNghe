@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -13,6 +14,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.logout.LogoutHandler;
+
+import static org.springframework.security.config.Customizer.withDefaults;
 
 
 @Configuration
@@ -35,7 +38,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests()
                 .requestMatchers("/login",
                         "/logout",
-                        "/fail",
+//                        "/loginGoogle/gg",
                         "/view/**",
                         "/api/v1/auth/**",
                         "/js/**", "/css/**",
@@ -53,6 +56,10 @@ public class SecurityConfig {
                 .and()
                 .authenticationProvider(authenticationProvider)
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
+                .oauth2Login()
+                .loginPage("/login") // Đường dẫn đến trang đăng nhập
+                .defaultSuccessUrl("/view") // Đường dẫn sau khi xác thực thành công
+                .and()
 //                .formLogin().loginPage("/login").permitAll()
 //                .defaultSuccessUrl("/view")
 //                .failureForwardUrl("/fail_Login")
@@ -60,11 +67,12 @@ public class SecurityConfig {
                 .logout()
                 .logoutUrl("/api/v1/auth/logout")
                 .addLogoutHandler(logoutHandler)
-                .logoutSuccessHandler((request, response, authentication) -> SecurityContextHolder.clearContext())
-        ;
+                .logoutSuccessHandler((request, response, authentication) -> SecurityContextHolder.clearContext());
+
 
         return http.build();
     }
+
 
 
 }

@@ -11,19 +11,21 @@
 <body ng-app="myApp">
 <div class="container" id="container" ng-controller="LoginController">
     <div class="form-container log-in-container">
-        <form  method="post">
-            <h1>Login</h1>
-            <div class="social-container">
-                <a href="#" class="social"><i class="fa fa-facebook fa-2x"></i></a>
-                <a href="#" class="social"><i class="fab fa fa-twitter fa-2x"></i></a>
-            </div>
-            <span>or use your account</span>
-            <input type="email" name="username" placeholder="Email" ng-model="email" />
-            <input type="password" name="password" placeholder="Password" ng-model="password"/>
-            <span   class="text-danger" style="color: red"></span>
-            <a href="#">Forgot your password?</a>
-            <button type="submit" ng-click="login()" >Log In</button>
-        </form>
+<!--        <form  method="post">-->
+<!--            <h1>Login</h1>-->
+<!--            <div class="social-container">-->
+<!--                <a href="#" class="social"><i class="fa fa-facebook fa-2x"></i></a>-->
+<!--                <a href="/login/oauth2/code/google" class="social"><i class="fab fa fa-twitter fa-2x"></i></a>-->
+<!--            </div>-->
+<!--            <span>or use your account</span>-->
+<!--            <input type="email" name="username" placeholder="Email" ng-model="email" />-->
+<!--            <input type="password" name="password" placeholder="Password" ng-model="password"/>-->
+<!--            <span   class="text-danger" style="color: red" name="error" id="error"></span>-->
+<!--            <a href="#">Forgot your password?</a>-->
+<!--            <button type="submit" ng-click="login()" >Log In</button>-->
+<!--        </form>-->
+        <h2>Login</h2>
+        <a href="/oauth2/authorization/google">Login with Google</a>
     </div>
     <div class="overlay-container">
         <div class="overlay">
@@ -31,7 +33,9 @@
                 <h1>website bán đồ công nghệ</h1>
 
             </div>
+
         </div>
+
     </div>
 </div>
 <script src="../js/Login.js"></script>
