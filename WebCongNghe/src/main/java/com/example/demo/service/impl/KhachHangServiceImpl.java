@@ -25,6 +25,10 @@ public class KhachHangServiceImpl implements KhachHangService {
         return khachHangResponsitory.findKhachHangByEmailAndMatKhau( email, matKhau);
     }
 
+    @Override
+    public KhachHang save(KhachHang khachHang) {
+        return khachHangResponsitory.save(khachHang);
+    }
 
 
 }

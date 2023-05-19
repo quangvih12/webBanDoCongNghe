@@ -9,4 +9,6 @@ public interface KhachHangService {
      Optional<KhachHang> findByEmail(String email);
 
     Boolean checkLogin(String email,String matKhau);
+
+    KhachHang save(KhachHang khachHang);
 }
