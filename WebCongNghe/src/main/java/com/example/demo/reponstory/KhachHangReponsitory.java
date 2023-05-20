@@ -13,6 +13,6 @@ public interface KhachHangReponsitory extends JpaRepository<KhachHang, Integer> 
     @Query("SELECT kh FROM KhachHang kh WHERE kh.email =:email AND kh.matKhau=:matKhau")
     Boolean findKhachHangByEmailAndMatKhau(String email, String matKhau);
 
-    Optional<KhachHang> findByEmail(String email);
+   KhachHang findByEmail(String email);
 
 }

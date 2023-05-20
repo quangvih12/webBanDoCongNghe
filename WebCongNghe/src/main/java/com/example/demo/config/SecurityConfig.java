@@ -2,6 +2,7 @@ package com.example.demo.config;
 
 import com.example.demo.Authentication.JwtAuthenticationTokenFilter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -11,6 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.logout.LogoutHandler;
 
@@ -21,6 +23,8 @@ import org.springframework.security.web.authentication.logout.LogoutHandler;
 @ComponentScan(basePackages = "com.example.demo")
 public class SecurityConfig {
 
+    @Autowired
+    AuthenticationSuccessHandler successHandler;
 
     private final JwtAuthenticationTokenFilter jwtAuthFilter;
     private final AuthenticationProvider authenticationProvider;
@@ -36,7 +40,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests()
                 .requestMatchers("/login",
                         "/logout",
-//                        "/loginGoogle/gg",
+                        "/tests",
                         "/view/**",
                         "/api/v1/auth/**",
                         "/js/**", "/css/**",
@@ -54,10 +58,6 @@ public class SecurityConfig {
                 .and()
                 .authenticationProvider(authenticationProvider)
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
-                .oauth2Login()
-                .loginPage("/login") // Đường dẫn đến trang đăng nhập
-                .defaultSuccessUrl("/view") // Đường dẫn sau khi xác thực thành công
-                .and()
 //                .formLogin().loginPage("/login").permitAll()
 //                .defaultSuccessUrl("/view")
 //                .failureForwardUrl("/fail_Login")
@@ -65,12 +65,12 @@ public class SecurityConfig {
                 .logout()
                 .logoutUrl("/api/v1/auth/logout")
                 .addLogoutHandler(logoutHandler)
-                .logoutSuccessHandler((request, response, authentication) -> SecurityContextHolder.clearContext());
+                .logoutSuccessHandler((request, response, authentication) -> SecurityContextHolder.clearContext())
+                .and().oauth2Login().loginPage("/login").successHandler(successHandler);
 
 
         return http.build();
     }
-
 
 
 }

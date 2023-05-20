@@ -6,7 +6,7 @@ import java.util.Optional;
 
 public interface KhachHangService {
 
-     Optional<KhachHang> findByEmail(String email);
+     KhachHang findByEmail(String email);
 
     Boolean checkLogin(String email,String matKhau);
 

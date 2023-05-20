@@ -55,7 +55,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
             return AuthenticationResponse.builder().error("Thông tin đăng nhập không chính xác").build();
         }
 
-        var khachHang = repository.findByEmail(request.getEmail()).orElseThrow();
+        var khachHang = repository.findByEmail(request.getEmail());
         var jwtToken = jwtService.generateToken(khachHang);
 
         // lay ra id khach hang

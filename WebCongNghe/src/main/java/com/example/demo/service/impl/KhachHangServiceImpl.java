@@ -16,7 +16,7 @@ public class KhachHangServiceImpl implements KhachHangService {
 
 
     @Override
-    public Optional<KhachHang> findByEmail(String email) {
+    public KhachHang findByEmail(String email) {
         return khachHangResponsitory.findByEmail(email);
     }
 

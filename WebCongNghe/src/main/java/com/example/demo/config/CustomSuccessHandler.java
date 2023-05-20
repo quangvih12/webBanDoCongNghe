@@ -25,21 +25,32 @@ public class CustomSuccessHandler implements AuthenticationSuccessHandler {
     @Autowired
     private KhachHangServiceImpl khachHangService;
 
+    public static String name;
+
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
         String redirectUrl = null;
-        if(authentication.getPrincipal() instanceof DefaultOAuth2User) {
-            DefaultOAuth2User  userDetails = (DefaultOAuth2User ) authentication.getPrincipal();
-            String username = userDetails.getAttribute("email") !=null?userDetails.getAttribute("email"):userDetails.getAttribute("login")+"@gmail.com" ;
-            if(khachHangReponsitory.findByEmail(username) == null) {
+
+        if (authentication.getPrincipal() instanceof DefaultOAuth2User) {
+            DefaultOAuth2User userDetails = (DefaultOAuth2User) authentication.getPrincipal();
+            String username = userDetails.getAttribute("email") != null ? userDetails.getAttribute("email") : userDetails.getAttribute("login") + "@gmail.com";
+            System.out.println(username);
+            name = username;
+            if (khachHangReponsitory.findByEmail(username) == null) {
                 KhachHang user = new KhachHang();
                 user.setEmail(username);
-                user.setTen(userDetails.getAttribute("email") !=null?userDetails.getAttribute("email"):userDetails.getAttribute("login"));
+                user.setTen(userDetails.getAttribute("email") != null ? userDetails.getAttribute("email") : userDetails.getAttribute("login"));
                 user.setMatKhau(("1234"));
                 user.setRole(Role.USER);
+
                 khachHangService.save(user);
-            }
-        }  redirectUrl = "/dashboard";
+            } else System.out.println("no");
+        }
+        redirectUrl = "/view";
         new DefaultRedirectStrategy().sendRedirect(request, response, redirectUrl);
+    }
+
+    public static String nameLogin() {
+        return name;
     }
 }
