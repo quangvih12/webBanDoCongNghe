@@ -103,10 +103,14 @@ app.controller('searchOurStoreController', function ($scope, $http) {
 
 // hien thi navbar gio hang
 window.onload = function () {
-    document.querySelector("#cart-icon").onclick = function () {
+  
+    document.querySelector('#cart-icon').onclick = function () {
         document.querySelector(".cart").classList.add("active");
     },
         document.querySelector("#close-cart").onclick = function () {
             document.querySelector(".cart").classList.remove("active");
         }
+
 };
+
+

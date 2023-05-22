@@ -4,6 +4,7 @@ package com.example.demo.controller;
 import com.example.demo.config.CustomSuccessHandler;
 import com.example.demo.entity.KhachHang;
 import com.example.demo.reponstory.KhachHangReponsitory;
+import com.example.demo.service.impl.LoginGoogleServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -19,10 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class HomeController {
 
     @Autowired
-    private KhachHangReponsitory khachHangReponsitory;
-
-    @Autowired
-    private CustomSuccessHandler customSuccessHandler;
+    private LoginGoogleServiceImpl loginGoogleService;
 
     @GetMapping()
     public String index() {
@@ -46,15 +44,7 @@ public class HomeController {
 
     @GetMapping("/header")
     public String header(Model model) {
-        SecurityContext  securityContext = SecurityContextHolder.getContext();
-        Object principal = securityContext.getAuthentication().getPrincipal();
-        if (principal instanceof DefaultOAuth2User) {
-            DefaultOAuth2User user = (DefaultOAuth2User) principal;
-            model.addAttribute("userDetails", user.getAttribute("name") != null ? user.getAttribute("name") : user.getAttribute("login"));
-        } else {
-            KhachHang khachHang = khachHangReponsitory.findByEmail(customSuccessHandler.nameLogin());
-            model.addAttribute("userDetails", khachHang.getTen());
-        }
+        loginGoogleService.getLooginGG(model);
         return "layout/Header";
     }
 
@@ -77,6 +67,5 @@ public class HomeController {
     public String bill() {
         return "bill";
     }
-
 
 }

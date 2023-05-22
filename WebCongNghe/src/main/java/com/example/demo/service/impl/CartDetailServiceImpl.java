@@ -27,12 +27,20 @@ public class CartDetailServiceImpl implements CartDetailService {
     @Autowired
     private AuthenticationServiceImpl authenticationService;
 
+    @Autowired
+    private LoginGoogleServiceImpl loginGoogleService;
+
     @Override
     // find all theo id khach hang
     public ResponseEntity<List<GioHangChiTiet>> getAll() {
         try {
             List<GioHangChiTiet> listGioHang = new ArrayList<>();
-            int idKh = authenticationService.getCurrentLoginId();
+            int idKh;
+            if (authenticationService.getCurrentLoginId() != null) {
+                idKh = authenticationService.getCurrentLoginId();
+            } else {
+                idKh = loginGoogleService.getIdUser();
+            }
             gioHangCTRespon.findAllByTen(idKh).forEach(listGioHang::add);
             if (listGioHang.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);

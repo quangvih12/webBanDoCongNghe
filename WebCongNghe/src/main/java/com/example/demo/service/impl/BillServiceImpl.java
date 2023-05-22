@@ -1,5 +1,6 @@
 package com.example.demo.service.impl;
 
+import com.example.demo.controller.HomeController;
 import com.example.demo.entity.HoaDon;
 import com.example.demo.entity.hoaDonChiTiet;
 import com.example.demo.reponstory.BillDetailReponsitory;
@@ -23,6 +24,9 @@ public class BillServiceImpl implements BillService {
     @Autowired
     private BillDetailReponsitory hoaDonCTRespon;
 
+    @Autowired
+    private LoginGoogleServiceImpl loginGoogleService;
+
     private AuthenticationServiceImpl authenticationService;
 
     @Override
@@ -30,7 +34,12 @@ public class BillServiceImpl implements BillService {
     public ResponseEntity<List<HoaDon>> getAll() {
         try {
             List<HoaDon> HoaDonList = new ArrayList<>();
-            int idKh = authenticationService.getCurrentLoginId();
+            int idKh;
+            if (authenticationService.getCurrentLoginId() != null) {
+                idKh = authenticationService.getCurrentLoginId();
+            } else {
+                idKh = loginGoogleService.getIdUser();
+            }
             hoaDonRespon.findAllByTen(idKh).forEach(HoaDonList::add);
             if (HoaDonList.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -68,7 +77,7 @@ public class BillServiceImpl implements BillService {
         if (hoaDonData.isPresent()) {
             HoaDon _hoaDon = hoaDonData.get();
             _hoaDon.setTrangThaiTT(hoaDon.getTrangThaiTT());
-           hoaDonRespon.save(_hoaDon);
+            hoaDonRespon.save(_hoaDon);
             return new ResponseEntity<>(hoaDonRespon.save(_hoaDon), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
