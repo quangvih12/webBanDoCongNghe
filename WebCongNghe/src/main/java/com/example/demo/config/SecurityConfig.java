@@ -1,6 +1,7 @@
 package com.example.demo.config;
 
 import com.example.demo.Authentication.JwtAuthenticationTokenFilter;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -66,7 +67,8 @@ public class SecurityConfig {
                 .logoutUrl("/api/v1/auth/logout")
                 .addLogoutHandler(logoutHandler)
                 .logoutSuccessHandler((request, response, authentication) -> SecurityContextHolder.clearContext())
-                .and().oauth2Login().loginPage("/login").successHandler(successHandler);
+                .and().oauth2Login().loginPage("/login")
+               .successHandler(successHandler);
 
 
         return http.build();

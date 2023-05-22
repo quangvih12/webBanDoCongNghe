@@ -74,8 +74,7 @@ public class BillDetailServiceImpl implements BillDetailService {
     @Override
     // luu idsp vao listIdSp
     public String saveCheckbox(Integer idSanPham) {
-
-    // add tam thoi id san pham vao hashSet
+        // add tam thoi id san pham vao hashSet
         numberSet.add(idSanPham);
         for (int number : lsitIdSanPhamSession) {
             if (!numberSet.add(number)) {
@@ -83,10 +82,7 @@ public class BillDetailServiceImpl implements BillDetailService {
                 lsitIdSanPhamSession.remove((Integer) number);
             }
         }
-
-
         System.out.println(idSanPham);
-
         return "";
     }
 
@@ -95,7 +91,6 @@ public class BillDetailServiceImpl implements BillDetailService {
         // remove khoi hashSet
         numberSet.remove(idSanPham);
         System.out.println("remove" + idSanPham);
-
         return "";
     }
 
@@ -103,7 +98,6 @@ public class BillDetailServiceImpl implements BillDetailService {
     // test luu idsp
     public void get() {
         System.out.println("-------------------");
-
         for (Integer s : numberSet) {
             System.out.println(s);
         }
@@ -200,8 +194,6 @@ public class BillDetailServiceImpl implements BillDetailService {
                 if (o.getChiTietSP().getId() == i) {
                     gioHangCTRespon.delete(o);
                 }
-
-
             }
             // remove idsp khoi set
             numberSet.remove(o.getChiTietSP().getId());
