@@ -72,7 +72,7 @@
         </div>
         <!--        (keyup)="searchHeader()"-->
         <i class="bi bi-list" id="menu-icon"></i>
-        <nav class="navbar" >
+        <nav class="navbar">
 
             <div class="header-Favourite">
                 <div class="header-Favourite-i">
@@ -83,27 +83,28 @@
                     <a href="">Favourite Wishlist</a>
                 </div>
             </div>
-            <div class="header-Favourite"  style="    display: flex;" >
+            <div class="header-Favourite" style="    display: flex;">
                 <div class="header-Favourite-i">
-                    <i class="bi bi-person-circle" ></i>
+                    <i class="bi bi-person-circle"></i>
                 </div>
 
                 <div class="header-Favourite-a">
                     <div class="dropdown" style="    margin-top: 4px;font-size: 1.3rem;">
-                        <span  id="username"
-                                class=" dropdown-toggle"
-                                type="button"
-                                data-bs-toggle="dropdown"
-                                aria-expanded="false"
-                               style="color: white"
+                        <span id="username"
+                              class=" dropdown-toggle"
+                              type="button"
+                              data-bs-toggle="dropdown"
+                              aria-expanded="false"
+                              style="color: white"
                         >
 <!--                            log in My Account-->
                         </span>
                         <ul class="dropdown-menu dropdown-menu">
                             <li>
                                 <a class="dropdown-item active" href="/login"> login</a>
-                            </li> <li>
-                            <p th:text="${userDetails}"></p>
+                            </li>
+                            <li>
+                                <p th:text="${userDetails}"></p>
                             </li>
                             <li>
                                 <a class="dropdown-item" href="#"> English</a>
@@ -121,11 +122,13 @@
 
           <span>
               <a class="sp_cart_top">
-<!--                <i class="bi bi-cart4" id="cart-icon" style="margin-right: 10px"></i>-->
+                <i class="bi bi-cart4" style="margin-right: 10px" data-bs-toggle="offcanvas"
+                   data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"></i>
               <span id="span-SlSanPham">0</span>
-              <span id="cart-icon">0</span>
+
               </a>
- <span style="color: white; font-size: 1.4rem ">$<span style="color: white; font-size: 1.2rem;margin-left: 2px;" id="span-tutal"></span></span>
+ <span style="color: white; font-size: 1.4rem ">$<span style="color: white; font-size: 1.2rem;margin-left: 2px;"
+                                                       id="span-tutal"></span></span>
             </span>
 
             </div>
@@ -164,9 +167,28 @@
         </nav>
     </div>
 
-    <div class="cart">
-        <h2 class="cart-title">Your Cart</h2>
+    <!--    <div class="cart">-->
+    <!--        <h2 class="cart-title">Your Cart</h2>-->
 
+    <!--        <div class="cart-content" id="cart-content">-->
+
+    <!--        </div>-->
+    <!--        <div class="total">-->
+    <!--            <div class="total-title">total:$</div>-->
+    <!--            <div class="total-price" id="total-price"></div>-->
+    <!--        </div>-->
+    <!--        <a type="button" class="btn-buy" href="#gioHang"-->
+    <!--           style="float: left;height: 43px;text-align: center;width: 112px; margin-left: 110px;">VIEW CART</a>-->
+
+
+    <!--        <i class="bi bi-x-lg" id="close-cart"></i>-->
+    <!--    </div>-->
+
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+        <div class="offcanvas-header">
+            <h2 class="cart-title">Your Cart</h2>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
         <div class="cart-content" id="cart-content">
 
         </div>
@@ -176,9 +198,6 @@
         </div>
         <a type="button" class="btn-buy" href="#gioHang"
            style="float: left;height: 43px;text-align: center;width: 112px; margin-left: 110px;">VIEW CART</a>
-
-
-        <i class="bi bi-x-lg" id="close-cart"></i>
     </div>
 </div>
 
