@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.security.Principal;
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -23,7 +25,7 @@ import java.util.List;
 @RequestMapping("/api/gioHang")
 public class CartDetailResController {
     @Autowired
-    private  CartDetailServiceImpl cartDetailService;
+    private CartDetailServiceImpl cartDetailService;
 
     // get all
     @GetMapping("/getAll")
@@ -61,5 +63,11 @@ public class CartDetailResController {
 
     }
 
+    @PostMapping("/add")
+    public ResponseEntity<?> addCart(@RequestParam Integer idSanPHamCT,
+                                     @RequestParam Integer soLuong, Principal principal) {
+        HashMap<String, Object> map = cartDetailService.addCart(idSanPHamCT, soLuong, principal);
+        return ResponseEntity.ok(map);
+    }
 
 }

@@ -82,7 +82,6 @@ public class BillDetailServiceImpl implements BillDetailService {
                 lsitIdSanPhamSession.remove((Integer) number);
             }
         }
-        System.out.println(idSanPham);
         return "";
     }
 
@@ -90,7 +89,6 @@ public class BillDetailServiceImpl implements BillDetailService {
     public String removeCheckbox(Integer idSanPham) {
         // remove khoi hashSet
         numberSet.remove(idSanPham);
-        System.out.println("remove" + idSanPham);
         return "";
     }
 

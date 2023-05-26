@@ -1,17 +1,22 @@
 package com.example.demo.service.impl;
 
+import com.example.demo.entity.ChiTietSanPham;
 import com.example.demo.entity.GioHang;
 import com.example.demo.entity.GioHangChiTiet;
 import com.example.demo.entity.KhachHang;
 import com.example.demo.reponstory.CartDetailReponsitory;
-import com.example.demo.reponstory.CartReponsitory;
+import com.example.demo.reponstory.CartsReponstory;
+import com.example.demo.reponstory.ProductReponstory;
 import com.example.demo.service.CartDetailService;
+import com.example.demo.util.DataUltil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.security.Principal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,14 +26,19 @@ public class CartDetailServiceImpl implements CartDetailService {
     @Autowired
     private CartDetailReponsitory gioHangCTRespon;
 
+
     @Autowired
-    private CartReponsitory gioHangRespon;
+    private CartsReponstory cartsReponstory;
 
     @Autowired
     private AuthenticationServiceImpl authenticationService;
 
     @Autowired
     private LoginGoogleServiceImpl loginGoogleService;
+
+    @Autowired
+    private ProductReponstory productReponstory;
+
 
     @Override
     // find all theo id khach hang
@@ -61,11 +71,62 @@ public class CartDetailServiceImpl implements CartDetailService {
             int idKh = authenticationService.getCurrentLoginId();
             KhachHang kh = KhachHang.builder().id(idKh).build();
             GioHang _gioHang = GioHang.builder().khachHang(kh).build();
-            GioHang gh = gioHangRespon.save(_gioHang);
-            gioHangCTRespon.createGioHangCT(idSanPHamCT, gh.getId(), soLuong);
+//            GioHang gh = gioHangRespon.save(_gioHang);
+//            gioHangCTRespon.createGioHangCT(idSanPHamCT, gh.getId(), soLuong);
         }
 
     }
+
+    public HashMap<String, Object> addCart(Integer id, Integer soLuong, Principal principal) {
+        Integer idKh;
+        if (authenticationService.getCurrentLoginId() != null) {
+            idKh = authenticationService.getCurrentLoginId();
+        } else {
+            idKh = loginGoogleService.getIdUser();
+        }
+        if (idKh == null) {
+            HashMap<String, Object> map = DataUltil.setData("error", "vui lòng đăng nhập");
+            return map;
+        }
+        ChiTietSanPham sanPham = productReponstory.getById(id);
+        if (soLuong > sanPham.getSoLuongTon()) {
+            HashMap<String, Object> map = DataUltil.setData("error", "số lượng sản phẩm không đủ");
+            return map;
+        } else {
+            KhachHang kh = KhachHang.builder().id(idKh).build();
+            GioHang _gioHang = GioHang.builder().khachHang(kh).build();
+            Optional<GioHangChiTiet> optional = this.getById(kh.getId(), sanPham.getId());
+            if (optional.isPresent()) {
+                GioHangChiTiet gioHangChiTiet = optional.get();
+                if (soLuong + gioHangChiTiet.getSoLuong() > sanPham.getSoLuongTon()) {
+                    HashMap<String, Object> map = DataUltil.setData("error", "số lượng tối đa chỉ còn: " + sanPham.getSoLuongTon());
+                    return map;
+                } else {
+                    gioHangChiTiet.setSoLuong(soLuong + gioHangChiTiet.getSoLuong());
+                    gioHangCTRespon.save(gioHangChiTiet);
+                    HashMap<String, Object> map = DataUltil.setData("error", "thêm thành công");
+                    return map;
+                }
+            } else {
+                System.out.println("e");
+                GioHang gh = cartsReponstory.save(_gioHang);
+                GioHangChiTiet gioHangChiTiet = GioHangChiTiet.builder()
+                        .soLuong(soLuong)
+                        .gioHang(gh)
+                        .chiTietSP(sanPham)
+                        .build();
+                gioHangCTRespon.save(gioHangChiTiet);
+                HashMap<String, Object> map = DataUltil.setData("error", "thêm thành công");
+                return map;
+            }
+        }
+    }
+
+
+    public Optional<GioHangChiTiet> getById(Integer id, Integer idsp) {
+        return gioHangCTRespon.findById(id, idsp);
+    }
+
 
     @Override
     // xoa khoi gio hang theo id

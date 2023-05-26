@@ -1,7 +1,10 @@
 package com.example.demo.reponstory;
 
 
+import com.example.demo.entity.ChiTietSanPham;
+import com.example.demo.entity.GioHang;
 import com.example.demo.entity.GioHangChiTiet;
+import com.example.demo.entity.SanPham;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -9,6 +12,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface CartDetailReponsitory extends JpaRepository<GioHangChiTiet, Integer> {
@@ -36,6 +40,9 @@ public interface CartDetailReponsitory extends JpaRepository<GioHangChiTiet, Int
     void deleteGhById(Integer idsp);
 
     @Query("Select pt from GioHangChiTiet pt where pt.gioHang.khachHang.id=:id")
-    public List<GioHangChiTiet> findAllByTen(Integer id);
+    List<GioHangChiTiet> findAllByTen(Integer id);
 
+
+    @Query("Select pt from GioHangChiTiet pt where pt.gioHang.khachHang.id=:id and pt.chiTietSP.id=:idsp")
+    Optional<GioHangChiTiet> findById(Integer id, Integer idsp);
 }

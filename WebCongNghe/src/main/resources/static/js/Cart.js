@@ -3,28 +3,23 @@ window.gioHangController = function ($scope, $http) {
     var div = document.getElementById("table");
     $scope.gioHang = [];
 
-    let tutals = 0;
-    let tutal = 0;
+    var tutals = 0;
     //getAll
     $http.get("http://localhost:8080/api/gioHang/getAll")
         .then(function (response) {
                 $scope.gioHang = response.data;
-                lenght = response.data.length;
-                response.data.map(function (sp) {
-
-                    tutals = 0;
-                    for (var i = 0; i < response.data.length; i++) {
-                       tutal = response.data[i].soLuong * response.data[i].donGia;
-                        tutals += tutal;
-                    }
-                    console.log(tutals)
-                    document.getElementById('tongthanhtoan').textContent = tutals;
-
-                })
+                console.log(response.data);
+                response.data.forEach(function (sp) {
+                    var tutal = sp.soLuong * sp.chiTietSP.giaBan;
+                    tutals += tutal;
+                });
+                console.log(tutals);
+                $scope.tongthanhtoan = tutals;
             },
             function (error) {
                 console.log(error);
             });
+
 
 //thanh toan
     $scope.save = function () {
@@ -43,11 +38,10 @@ window.gioHangController = function ($scope, $http) {
         });
     }
 
-
+    $scope.isDisabled = true;
     $scope.getDetails = function (idsp) {
         $scope.isDisabled = true;
         angular.forEach($scope.gioHang, function (item) {
-
             // console.log(item.isChecked)
             if (item.isChecked === true) {
                 $http.post("http://localhost:8080/api/hoaDon/save-checkbox" + "?idSanPham=" + idsp
