@@ -1,17 +1,21 @@
 package com.example.demo.service.impl;
 
 import com.example.demo.controller.HomeController;
+import com.example.demo.entity.ChiTietSanPham;
 import com.example.demo.entity.HoaDon;
 import com.example.demo.entity.hoaDonChiTiet;
 import com.example.demo.reponstory.BillDetailReponsitory;
 import com.example.demo.reponstory.BillReponsitory;
+import com.example.demo.reponstory.ProductReponstory;
 import com.example.demo.service.BillService;
+import com.example.demo.util.DataUltil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,6 +33,9 @@ public class BillServiceImpl implements BillService {
 
     @Autowired
     private AuthenticationServiceImpl authenticationService;
+
+    @Autowired
+    private ProductReponstory productReponstory;
 
     private final Integer CHOXACNHAN = 0;
     private final Integer DANGGIAO = 1;
@@ -68,16 +75,26 @@ public class BillServiceImpl implements BillService {
 
     // huy hoa don
     @Override
-    public ResponseEntity<HoaDon> updateHoaDon(Integer id, HoaDon hoaDon) {
+    public HashMap<String, Object> updateHoaDon(Integer id, HoaDon hoaDon) {
         Optional<HoaDon> hoaDonData = hoaDonRespon.findById(id);
-
         if (hoaDonData.isPresent()) {
             HoaDon _hoaDon = hoaDonData.get();
             _hoaDon.setTrangThaiTT(hoaDon.getTrangThaiTT());
-            hoaDonRespon.save(_hoaDon);
-            return new ResponseEntity<>(hoaDonRespon.save(_hoaDon), HttpStatus.OK);
+            HoaDon hd = hoaDonRespon.save(_hoaDon);
+
+            hoaDonChiTiet hoaDonChiTiet = hoaDonCTRespon.getByIdSP(hd.getId()).get();
+
+            Optional<ChiTietSanPham> chiTietSanPham = productReponstory.findById(hoaDonChiTiet.getChiTietSP().getId());
+            if (chiTietSanPham.isPresent()) {
+                ChiTietSanPham ct = chiTietSanPham.get();
+                ct.setSoLuongTon(ct.getSoLuongTon() + hoaDonChiTiet.getSoLuong());
+                productReponstory.save(ct);
+            }
+            HashMap<String, Object> map = DataUltil.setData("warning", "bạn muốn hủy đơn hàng: " + _hoaDon.getMa());
+            return map;
         } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            HashMap<String, Object> map = DataUltil.setData("warning", "không tìm thấy hóa đơn bạn muốn hủy");
+            return map;
         }
     }
 }

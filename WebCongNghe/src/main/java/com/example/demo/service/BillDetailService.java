@@ -20,11 +20,9 @@ public interface BillDetailService {
 
     String removeCheckbox(Integer idSanPham);
 
-    HashMap<String, Object> createHoaDonCT(BigDecimal TongTienHoaDon, HoaDon _hoaDon);
-
     void get();
 
-    HoaDon saveHoaDon( BigDecimal TongTienHoaDon,HoaDon _hoaDon);
+    HoaDon saveHoaDon(BigDecimal TongTienHoaDon, HoaDon _hoaDon);
 
     HashMap<String, Object> saveTheoID(BigDecimal TongTienHoaDon, HoaDon _hoaDon);
 

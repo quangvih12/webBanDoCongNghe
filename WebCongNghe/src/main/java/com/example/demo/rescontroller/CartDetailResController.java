@@ -53,13 +53,15 @@ public class CartDetailResController {
     }
 
     @PutMapping("/gioHangs/{id}")
-    public ResponseEntity<GioHangChiTiet> updateCongSoLuong(@PathVariable("id") Integer id, @RequestBody GioHangChiTiet gioHangChiTiet) {
-        return cartDetailService.updateCongSoLuong(id);
+    public ResponseEntity<?> updateCongSoLuong(@PathVariable("id") Integer id, @RequestBody GioHangChiTiet gioHangChiTiet) {
+        HashMap<String, Object> map = cartDetailService.updateTruSoLuong(id);
+        return ResponseEntity.ok(map);
     }
 
     @PutMapping("/gioHang/{id}")
-    public ResponseEntity<GioHangChiTiet> updateTruSoLuong(@PathVariable("id") Integer id) {
-        return cartDetailService.updateTruSoLuong(id);
+    public ResponseEntity<?> updateTruSoLuong(@PathVariable("id") Integer id) {
+        HashMap<String, Object> map = cartDetailService.updateTruSoLuong(id);
+        return ResponseEntity.ok(map);
 
     }
 

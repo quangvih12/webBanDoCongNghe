@@ -4,6 +4,7 @@ import com.example.demo.entity.HoaDon;
 import com.example.demo.entity.hoaDonChiTiet;
 import org.springframework.http.ResponseEntity;
 
+import java.util.HashMap;
 import java.util.List;
 
 public interface BillService {
@@ -12,5 +13,5 @@ public interface BillService {
 
     ResponseEntity<List<hoaDonChiTiet>> getAllHDCT( Integer id);
 
-    ResponseEntity<HoaDon> updateHoaDon(Integer id, HoaDon hoaDon);
+    HashMap<String,Object> updateHoaDon(Integer id, HoaDon hoaDon);
 }

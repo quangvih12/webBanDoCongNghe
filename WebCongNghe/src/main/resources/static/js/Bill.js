@@ -59,7 +59,7 @@ window.billController = function ($scope, $http) {
         $http.get("http://localhost:8080/api/hoaDonD/" + id)
             .then(function (responseData) {
                     $scope.HoaDons = responseData.data;
-                    console.log($scope.HoaDons)
+                    // console.log($scope.HoaDons)
                 },
                 function (error) {
                     console.log(error);
@@ -72,9 +72,29 @@ window.billController = function ($scope, $http) {
             trangThaiTT: -1
         })
             .then(function (responseData) {
-                    $scope.HoaDons = responseData.data;
-                    console.log('ok');
-                    window.open("#bill", '_self');
+                    // $scope.HoaDons = responseData.data;
+
+                        if (responseData.data.statusCode == "warning") {
+                            swal.fire({
+                                title: responseData.data.data,
+                                icon: "warning",
+                                buttons: true,
+                                dangerMode: true,
+                            })
+                                .then((willDelete) => {
+                                    if (willDelete) {
+                                        swal.fire("đơn hàng đã được hủy!!!!", {
+                                            icon: "success",
+                                        });
+                                        window.open("#bill", '_self');
+                                    } else {
+                                        swal.fire("Your imaginary file is safe!");
+                                    }
+                                });
+
+                        }
+
+
                 },
                 function (error) {
                     console.log(error);

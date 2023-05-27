@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
 import java.util.List;
 
 @RestController
@@ -35,8 +36,9 @@ public class BillResController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<HoaDon> updateHoaDon(@PathVariable("id") Integer id, @RequestBody HoaDon hoaDon) {
-        return billService.updateHoaDon(id, hoaDon);
+    public ResponseEntity<?> updateHoaDon(@PathVariable("id") Integer id, @RequestBody HoaDon hoaDon) {
+        HashMap<String, Object> map = billService.updateHoaDon(id, hoaDon);
+        return ResponseEntity.ok(map);
     }
 
 }

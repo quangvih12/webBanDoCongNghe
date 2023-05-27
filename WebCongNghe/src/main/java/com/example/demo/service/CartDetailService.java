@@ -4,6 +4,7 @@ import com.example.demo.entity.GioHangChiTiet;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import java.util.HashMap;
 import java.util.List;
 
 public interface CartDetailService {
@@ -15,7 +16,7 @@ public interface CartDetailService {
 
     ResponseEntity<HttpStatus> deleteAllGioHangCT();
 
-    ResponseEntity<GioHangChiTiet> updateCongSoLuong(Integer id);
+    HashMap<String,Object> updateCongSoLuong(Integer id);
 
-    ResponseEntity<GioHangChiTiet> updateTruSoLuong(Integer id);
+    HashMap<String,Object> updateTruSoLuong(Integer id);
 }

@@ -12,7 +12,6 @@ import com.example.demo.reponstory.ProductReponstory;
 import com.example.demo.service.BillDetailService;
 import com.example.demo.util.DataUltil;
 import com.example.demo.util.DatetimeUtil;
-import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -112,16 +111,6 @@ public class BillDetailServiceImpl implements BillDetailService {
     }
 
     @Override
-    // thanh toan
-    public HashMap<String, Object> createHoaDonCT(BigDecimal TongTienHoaDon, HoaDon _hoaDon) {
-        List<GioHangChiTiet> listGioHang = gioHangCTRespon.findAll();
-        List<hoaDonChiTiet> listHoaDonCT = new ArrayList<>();
-//        this.saveTheoID(TongTienHoaDon, _hoaDon, listGioHang, listHoaDonCT);
-        HashMap<String, Object> map = DataUltil.setData("error", "thanh toán thành công");
-        return map;
-    }
-
-    @Override
     // tao ra hoa don
     public HoaDon saveHoaDon(BigDecimal TongTienHoaDon, HoaDon _hoaDon) {
         int idKh;
@@ -181,7 +170,7 @@ public class BillDetailServiceImpl implements BillDetailService {
             hd.setTrangthai(0);
             listHoaDonCT.add(hd);
 
-           // update lai so luong ton trong kho
+            // update lai so luong ton trong kho
             Optional<ChiTietSanPham> chiTietSanPham = productReponstory.findById(i);
             if (chiTietSanPham.isPresent()) {
                 ChiTietSanPham ct = chiTietSanPham.get();

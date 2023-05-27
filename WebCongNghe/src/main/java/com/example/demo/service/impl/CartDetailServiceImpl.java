@@ -9,6 +9,7 @@ import com.example.demo.reponstory.CartsReponstory;
 import com.example.demo.reponstory.ProductReponstory;
 import com.example.demo.service.CartDetailService;
 import com.example.demo.util.DataUltil;
+import com.example.demo.util.DatetimeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -108,12 +109,13 @@ public class CartDetailServiceImpl implements CartDetailService {
                     return map;
                 }
             } else {
-                System.out.println("e");
                 GioHang gh = cartsReponstory.save(_gioHang);
                 GioHangChiTiet gioHangChiTiet = GioHangChiTiet.builder()
                         .soLuong(soLuong)
                         .gioHang(gh)
+                        .donGia(sanPham.getGiaBan())
                         .chiTietSP(sanPham)
+                        .ngayTao(DatetimeUtil.getCurrentDate())
                         .build();
                 gioHangCTRespon.save(gioHangChiTiet);
                 HashMap<String, Object> map = DataUltil.setData("error", "thêm thành công");
@@ -152,28 +154,42 @@ public class CartDetailServiceImpl implements CartDetailService {
     }
 
     @Override
-    public ResponseEntity<GioHangChiTiet> updateCongSoLuong(Integer id) {
+    public HashMap<String, Object> updateCongSoLuong(Integer id) {
         Optional<GioHangChiTiet> tutorialData = gioHangCTRespon.findById(id);
 
         if (tutorialData.isPresent()) {
             GioHangChiTiet _gioHangChiTiet = tutorialData.get();
+
             _gioHangChiTiet.setSoLuong(_gioHangChiTiet.getSoLuong() + 1);
-            return new ResponseEntity<>(gioHangCTRespon.save(_gioHangChiTiet), HttpStatus.OK);
+            gioHangCTRespon.save(_gioHangChiTiet);
+            HashMap<String, Object> map = DataUltil.setData("warning", "ok");
+            return map;
         } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            HashMap<String, Object> map = DataUltil.setData("warning", "lỗi");
+            return map;
         }
     }
 
     @Override
-    public ResponseEntity<GioHangChiTiet> updateTruSoLuong(Integer id) {
+    public HashMap<String, Object> updateTruSoLuong(Integer id) {
         Optional<GioHangChiTiet> tutorialData = gioHangCTRespon.findById(id);
 
         if (tutorialData.isPresent()) {
             GioHangChiTiet _gioHangChiTiet = tutorialData.get();
             _gioHangChiTiet.setSoLuong(_gioHangChiTiet.getSoLuong() - 1);
-            return new ResponseEntity<>(gioHangCTRespon.save(_gioHangChiTiet), HttpStatus.OK);
+            if (_gioHangChiTiet.getSoLuong() <= 0) {
+                this.deleteGioHangCT(id);
+                HashMap<String, Object> map = DataUltil.setData("warning", "sản phẩm không được nhỏ bằng 0");
+                return map;
+            } else {
+                gioHangCTRespon.save(_gioHangChiTiet);
+                HashMap<String, Object> map = DataUltil.setData("warning", "ok");
+                return map;
+            }
+
         } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            HashMap<String, Object> map = DataUltil.setData("warning", "lỗi");
+            return map;
         }
 
     }

@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface BillDetailReponsitory extends JpaRepository<hoaDonChiTiet, Integer> {
@@ -34,4 +35,7 @@ public interface BillDetailReponsitory extends JpaRepository<hoaDonChiTiet, Inte
 
     @Query("SELECT hdct FROM hoaDonChiTiet hdct WHERE hdct.hoaDon.id = :id")
     List<hoaDonChiTiet> getAllHDCT(Integer id);
+
+    @Query("SELECT hdct FROM hoaDonChiTiet hdct WHERE hdct.hoaDon.id = :id")
+    Optional<hoaDonChiTiet> getByIdSP(Integer id);
 }
