@@ -22,9 +22,10 @@ public class BillResController {
     private BillServiceImpl billService;
 
     // get all hoa Don
-    @GetMapping()
-    public ResponseEntity<List<HoaDon>> getAll() {
-        return billService.getAll();
+    @GetMapping("/home/{trangThai}")
+    public ResponseEntity<List<HoaDon>> getAll(@PathVariable Integer trangThai) {
+        List<HoaDon> list = billService.getAll(trangThai);
+        return ResponseEntity.ok(list);
     }
 
     // khi click vao hoa don thi san phan se hien ra theo hoa don chi tiet

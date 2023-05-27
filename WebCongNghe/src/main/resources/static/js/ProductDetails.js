@@ -18,13 +18,14 @@ window.detailController = function ($scope, $http, $routeParams) {
         } else {
             $http.post("http://localhost:8080/api/gioHang/add" + "?soLuong=" + $scope.soLuong + "&idSanPHamCT=" + idSp).then(function (response) {
                 if (response.status === 200) {
-                    // window.open("/view", '_self');
-                    // $("#add-San-Pham").modal('hide');
                     if (response.data.statusCode == "error") {
-                        Swal.fire({
-                            icon: 'error',
+                        swal.fire({
+                            icon: 'success',
                             title: response.data.data
                         })
+                            .then((value) => {
+                                window.open("/view#/home", '_self');
+                            });
                     }
                 }
 

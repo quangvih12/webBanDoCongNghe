@@ -64,8 +64,7 @@
                         <li>
                             <div class="cover_soluong">
                                 <input type="number" value="1" class="soluong" name="soluong" ng-model="soLuong"/>
-                                <a class="dathang btn-addcart" data-id="1032" data-bs-toggle="modal"
-                                   data-bs-target="#add-San-Pham">ADD TO CART</a>
+                                <a class="dathang btn-addcart" data-id="1032"   ng-click="createGioHangCT(sps.id)">ADD TO CART</a>
                             </div>
 
                         </li>
@@ -79,23 +78,23 @@
 </div>
 
 <!--// modal add vao gio hang-->
-<div class="modal" id="add-San-Pham" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-     aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" style="height: 150px;width: 410px;">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Modal title</h5>
-            </div>
-            <div class="modal-body">
-                <p>thêm thành công</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-secondary" ng-click="createGioHangCT(sps.id)">Save Cart</button>
-            </div>
-        </div>
-    </div>
-</div>
+<!--<div class="modal" id="add-San-Pham" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"-->
+<!--     aria-labelledby="staticBackdropLabel" aria-hidden="true">-->
+<!--    <div class="modal-dialog modal-dialog-centered" style="height: 150px;width: 410px;">-->
+<!--        <div class="modal-content">-->
+<!--            <div class="modal-header">-->
+<!--                <h5 class="modal-title">Modal title</h5>-->
+<!--            </div>-->
+<!--            <div class="modal-body">-->
+<!--                <p>thêm thành công</p>-->
+<!--            </div>-->
+<!--            <div class="modal-footer">-->
+<!--                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>-->
+<!--                <button type="button" class="btn btn-secondary" ng-click="createGioHangCT(sps.id)">Save Cart</button>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
 
 <!--// modal so luong > 0 vao gio hang-->
 <div class="modal" id="modal_sanP" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"

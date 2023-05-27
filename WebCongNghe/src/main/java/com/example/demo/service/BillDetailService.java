@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.http.ResponseEntity;
 
 import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.List;
 
 public interface BillDetailService {
@@ -19,14 +20,12 @@ public interface BillDetailService {
 
     String removeCheckbox(Integer idSanPham);
 
-    ResponseEntity<hoaDonChiTiet> createHoaDonCT(BigDecimal TongTienHoaDon, HoaDon _hoaDon);
+    HashMap<String, Object> createHoaDonCT(BigDecimal TongTienHoaDon, HoaDon _hoaDon);
 
     void get();
 
-    HoaDon saveHoaDon(BigDecimal TongTienHoaDon, HoaDon _hoaDon);
+    HoaDon saveHoaDon( BigDecimal TongTienHoaDon,HoaDon _hoaDon);
 
-    void saveAll(BigDecimal TongTienHoaDon, HoaDon _hoaDon, List<GioHangChiTiet> listGioHang, List<hoaDonChiTiet> listHoaDonCT);
-
-    void saveTheoID(BigDecimal TongTienHoaDon, HoaDon _hoaDon, List<GioHangChiTiet> listGioHang, List<hoaDonChiTiet> listHoaDonCT);
+    HashMap<String, Object> saveTheoID(BigDecimal TongTienHoaDon, HoaDon _hoaDon);
 
 }

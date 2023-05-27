@@ -27,29 +27,26 @@ public class BillServiceImpl implements BillService {
     @Autowired
     private LoginGoogleServiceImpl loginGoogleService;
 
+    @Autowired
     private AuthenticationServiceImpl authenticationService;
+
+    private final Integer CHOXACNHAN = 0;
+    private final Integer DANGGIAO = 1;
+    private final Integer DAGIAO = 2;
+    private final Integer DAHUY = -1;
+    private final Integer DOITRA = 3;
+
 
     @Override
     // get all hoa Don theo id khach hang
-    public ResponseEntity<List<HoaDon>> getAll() {
-        try {
-            List<HoaDon> HoaDonList = new ArrayList<>();
-            int idKh;
-            if (authenticationService.getCurrentLoginId() != null) {
-                idKh = authenticationService.getCurrentLoginId();
-            } else {
-                idKh = loginGoogleService.getIdUser();
-            }
-            hoaDonRespon.findAllByTen(idKh).forEach(HoaDonList::add);
-            if (HoaDonList.isEmpty()) {
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-            } else {
-                return new ResponseEntity<>(HoaDonList, HttpStatus.OK);
-            }
-        } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+    public List<HoaDon> getAll(Integer chucNang) {
+        int idKh;
+        if (authenticationService.getCurrentLoginId() != null) {
+            idKh = authenticationService.getCurrentLoginId();
+        } else {
+            idKh = loginGoogleService.getIdUser();
         }
-
+        return hoaDonRespon.findAllHistory(chucNang, idKh);
     }
 
     @Override

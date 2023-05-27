@@ -33,8 +33,8 @@ public interface CartDetailReponsitory extends JpaRepository<GioHangChiTiet, Int
             "\t\t\t\tEND", nativeQuery = true)
     void createGioHangCT(Integer idSanPHamCT, Integer idGioHang, Integer soLuong);
 
-    @Query("SELECT ghct FROM GioHangChiTiet ghct WHERE ghct.chiTietSP.id =:idsp")
-    GioHangChiTiet getBySoLuong(Integer idsp);
+    @Query("SELECT ghct FROM GioHangChiTiet ghct WHERE ghct.chiTietSP.id =:idsp and ghct.gioHang.khachHang.id=:idKh")
+    GioHangChiTiet getChiTietSP(Integer idsp,Integer idKh);
 
     @Query("DELETE FROM GioHangChiTiet ghct WHERE ghct.chiTietSP.id =:idsp")
     void deleteGhById(Integer idsp);

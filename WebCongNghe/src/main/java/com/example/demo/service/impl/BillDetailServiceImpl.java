@@ -8,7 +8,9 @@ import com.example.demo.entity.hoaDonChiTiet;
 import com.example.demo.reponstory.BillDetailReponsitory;
 import com.example.demo.reponstory.BillReponsitory;
 import com.example.demo.reponstory.CartDetailReponsitory;
+import com.example.demo.reponstory.ProductReponstory;
 import com.example.demo.service.BillDetailService;
+import com.example.demo.util.DataUltil;
 import com.example.demo.util.DatetimeUtil;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -34,7 +37,14 @@ public class BillDetailServiceImpl implements BillDetailService {
     @Autowired
     private CartDetailReponsitory gioHangCTRespon;
 
+    @Autowired
     private AuthenticationServiceImpl authenticationService;
+
+    @Autowired
+    private LoginGoogleServiceImpl loginGoogleService;
+
+    @Autowired
+    private ProductReponstory productReponstory;
 
     private DatetimeUtil datetimeUtil;
 
@@ -103,76 +113,65 @@ public class BillDetailServiceImpl implements BillDetailService {
 
     @Override
     // thanh toan
-    public ResponseEntity<hoaDonChiTiet> createHoaDonCT(BigDecimal TongTienHoaDon, HoaDon _hoaDon) {
-        try {
-            List<GioHangChiTiet> listGioHang = gioHangCTRespon.findAll();
-            List<hoaDonChiTiet> listHoaDonCT = new ArrayList<>();
-
-            if (numberSet.isEmpty()) {
-                this.saveAll(TongTienHoaDon, _hoaDon, listGioHang, listHoaDonCT);
-            } else {
-                this.saveTheoID(TongTienHoaDon, _hoaDon, listGioHang, listHoaDonCT);
-            }
-            return new ResponseEntity<>(HttpStatus.CREATED);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+    public HashMap<String, Object> createHoaDonCT(BigDecimal TongTienHoaDon, HoaDon _hoaDon) {
+        List<GioHangChiTiet> listGioHang = gioHangCTRespon.findAll();
+        List<hoaDonChiTiet> listHoaDonCT = new ArrayList<>();
+//        this.saveTheoID(TongTienHoaDon, _hoaDon, listGioHang, listHoaDonCT);
+        HashMap<String, Object> map = DataUltil.setData("error", "thanh toán thành công");
+        return map;
     }
 
     @Override
     // tao ra hoa don
     public HoaDon saveHoaDon(BigDecimal TongTienHoaDon, HoaDon _hoaDon) {
-        int idKh = authenticationService.getCurrentLoginId();
+        int idKh;
+        if (authenticationService.getCurrentLoginId() != null) {
+            idKh = authenticationService.getCurrentLoginId();
+        } else {
+            idKh = loginGoogleService.getIdUser();
+        }
         KhachHang kh = KhachHang.builder().id(idKh).build();
         HoaDon hoaDon = HoaDon.builder()
-                .ngayThanhToan(datetimeUtil.getCurrentDateAndTime())
+                .ngayThanhToan(datetimeUtil.getCurrentDate())
                 .ghiChu(_hoaDon.getGhiChu())
                 .diaChi(_hoaDon.getDiaChi())
-                .ngayTao(datetimeUtil.getCurrentDateAndTime())
+                .ngayTao(datetimeUtil.getCurrentDate())
                 .phuongThucTT(_hoaDon.getPhuongThucTT())
                 .tongTien(TongTienHoaDon)
                 .sdt(_hoaDon.getSdt())
                 .tenNguoiNhan(_hoaDon.getTenNguoiNhan())
-                .trangThaiTT(1)
+                .trangThaiTT(0)
                 .khachHang(kh)
                 .build();
         return this.hoaDonRespon.save(hoaDon);
     }
 
-    @Override
-    // ham save all san pham
-    public void saveAll(BigDecimal TongTienHoaDon, HoaDon _hoaDon, List<GioHangChiTiet> listGioHang, List<hoaDonChiTiet> listHoaDonCT) {
-        HoaDon hoaDon = this.saveHoaDon(TongTienHoaDon, _hoaDon);
-        hoaDon.setMa("HD" + hoaDon.getId());
-//          lay ra id trong gio hang roi save all lai
-        for (GioHangChiTiet o : listGioHang) {
-
-            ChiTietSanPham ctSp = ChiTietSanPham.builder().id(o.getChiTietSP().getId()).build();
-            GioHangChiTiet giohang = gioHangCTRespon.getBySoLuong(o.getChiTietSP().getId());
-            hoaDonChiTiet hd = new hoaDonChiTiet();
-            hd.setChiTietSP(ctSp);
-            hd.setHoaDon(hoaDon);
-            hd.setDongia(o.getDonGia());
-            hd.setSoLuong(giohang.getSoLuong());
-            hd.setNgayTao(datetimeUtil.getCurrentDateAndTime());
-            hd.setTrangthai(0);
-            listHoaDonCT.add(hd);
-
-        }
-        hoaDonCtRespon.saveAll(listHoaDonCT);
-        gioHangCTRespon.deleteAll(listGioHang);
-
-    }
 
     @Override
     // ham save theo khach chon san pham trong gio hang
-    public void saveTheoID(BigDecimal TongTienHoaDon, HoaDon _hoaDon, List<GioHangChiTiet> listGioHang, List<hoaDonChiTiet> listHoaDonCT) {
+    public HashMap<String, Object> saveTheoID(BigDecimal TongTienHoaDon, HoaDon _hoaDon) {
+
+        Integer idKh;
+        if (authenticationService.getCurrentLoginId() != null) {
+            idKh = authenticationService.getCurrentLoginId();
+        } else {
+            idKh = loginGoogleService.getIdUser();
+        }
+        if (idKh == null) {
+            HashMap<String, Object> map = DataUltil.setData("error", "vui lòng đăng nhập");
+            return map;
+        }
+        List<GioHangChiTiet> listGioHang = gioHangCTRespon.findAll();
+        List<hoaDonChiTiet> listHoaDonCT = new ArrayList<>();
+
+
         HoaDon hoaDon = this.saveHoaDon(TongTienHoaDon, _hoaDon);
         hoaDon.setMa("HD" + hoaDon.getId());
+
         // lay id sp tu session roi save all
         for (Integer i : numberSet) {
             ChiTietSanPham ctSp = ChiTietSanPham.builder().id(i).build();
-            GioHangChiTiet giohang = gioHangCTRespon.getBySoLuong(i);
+            GioHangChiTiet giohang = gioHangCTRespon.getChiTietSP(i, idKh);
             hoaDonChiTiet hd = new hoaDonChiTiet();
             hd.setChiTietSP(ctSp);
             hd.setHoaDon(hoaDon);
@@ -182,6 +181,13 @@ public class BillDetailServiceImpl implements BillDetailService {
             hd.setTrangthai(0);
             listHoaDonCT.add(hd);
 
+           // update lai so luong ton trong kho
+            Optional<ChiTietSanPham> chiTietSanPham = productReponstory.findById(i);
+            if (chiTietSanPham.isPresent()) {
+                ChiTietSanPham ct = chiTietSanPham.get();
+                ct.setSoLuongTon(ct.getSoLuongTon() - giohang.getSoLuong());
+                productReponstory.save(ct);
+            }
         }
 
         hoaDonCtRespon.saveAll(listHoaDonCT);
@@ -196,6 +202,7 @@ public class BillDetailServiceImpl implements BillDetailService {
             // remove idsp khoi set
             numberSet.remove(o.getChiTietSP().getId());
         }
-
+        HashMap<String, Object> map = DataUltil.setData("error", "thanh toán thành công");
+        return map;
     }
 }

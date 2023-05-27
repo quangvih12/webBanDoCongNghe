@@ -14,5 +14,8 @@ import java.util.List;
 public interface BillReponsitory extends JpaRepository<HoaDon, Integer> {
 
     @Query("Select pt from HoaDon pt where pt.khachHang.id=:id")
-    public List<HoaDon> findAllByTen(Integer id);
+     List<HoaDon> findAllByTen(Integer id);
+
+    @Query("select  pt from HoaDon pt where pt.trangThaiTT=:id and pt.khachHang.id=:idKH")
+    List<HoaDon> findAllHistory(Integer id, Integer idKH);
 }

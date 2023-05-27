@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.List;
 
 @RestController
@@ -59,9 +60,10 @@ public class BillDetailResController {
 
     // thanh toan
     @PostMapping("/createhoaDon")
-    public ResponseEntity<hoaDonChiTiet> createHoaDonCT(@RequestParam(required = false) BigDecimal TongTienHoaDon,
-                                                        @RequestBody HoaDon _hoaDon) {
-        return billService.createHoaDonCT(TongTienHoaDon, _hoaDon);
+    public ResponseEntity<?> createHoaDonCT(@RequestParam(required = false) BigDecimal TongTienHoaDon,
+                                            @RequestBody HoaDon _hoaDon) {
+        HashMap<String, Object> map = billService.saveTheoID(TongTienHoaDon, _hoaDon);
+        return ResponseEntity.ok(map);
     }
 
 

@@ -1,6 +1,7 @@
 package com.example.demo.reponstory;
 
 import com.example.demo.entity.ChiTietSanPham;
+import com.example.demo.entity.GioHangChiTiet;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -20,5 +21,8 @@ public interface ProductReponstory extends JpaRepository<ChiTietSanPham, Integer
 
     @Query("Select pt from ChiTietSanPham pt where pt.dongsp.ten like  :nameDongSP")
     List<ChiTietSanPham> findByDongSp(String nameDongSP);
+
+//    @Query("SELECT ghct FROM ChiTietSanPham ghct WHERE ghct.id =:idsp and ghct..khachHang.id=:idKh")
+//    GioHangChiTiet getByIdSP(Integer idsp, Integer idKh);
 
 }

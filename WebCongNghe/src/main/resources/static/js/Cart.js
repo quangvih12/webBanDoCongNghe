@@ -31,8 +31,21 @@ window.gioHangController = function ($scope, $http) {
                 ghiChu: $scope.ghiChu
             }
         ).then(function (response) {
-            if (response.status === 201) {
-                $("#modal_thanhToan").modal('show');
+            if (response.status === 200) {
+                if (response.data.statusCode == "error") {
+                    // Swal.fire({
+                    //     icon: 'error',
+                    //     title: response.data.data
+                    // })
+                    swal.fire({
+                            icon: 'success',
+                            title: response.data.data
+                        })
+                        .then((value) => {
+                            // window.open("/view", '_self');
+                        });
+
+                }
             }
 
         });

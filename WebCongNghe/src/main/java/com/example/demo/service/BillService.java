@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface BillService {
 
-    ResponseEntity<List<HoaDon>> getAll();
+   List<HoaDon> getAll(Integer chucNang);
 
     ResponseEntity<List<hoaDonChiTiet>> getAllHDCT( Integer id);
 

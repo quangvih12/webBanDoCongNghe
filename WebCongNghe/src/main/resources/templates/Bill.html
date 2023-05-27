@@ -1,62 +1,427 @@
 <div class="container">
     <div class="row" style="margin-top: 170px; margin-bottom: 170px">
-        <h1 style="text-align: center">Hóa Đơn</h1>
-        <div class="col-5">
-            <table class="table table-strip mt-3" style="    margin-top: 30px;    margin-bottom: 160px">
-                <thead>
-                <tr style="background-color: #f0f0f0;    font-size: 1.4rem;" >
-                    <td>STT</td>
-                    <td>Mã hóa đơn</td>
-                    <td>Tên người nhận</td>
-                    <td>ngày tạo</td>
-                    <td>Tổng tiền</td>
-                    <td>Trạng thái</td>
-                    <td colspan="2">thao tác</td>
-                </tr>
-                </thead>
+        <div class="tieu-de" style="width: 150%; height: 150px; padding: 20px 0px 0px 0px;">
+            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist" style="margin: 50px 00px 0px 400px;">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill"
+                            data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home"
+                            aria-selected="true" style="background: #ffffff; color: black;font-size: 18px;">chờ xác nhận
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill"
+                            data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile"
+                            aria-selected="false" style="background: #ffffff; color: black;font-size: 18px;">đang giao
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="pills-con-tab" data-bs-toggle="pill"
+                            data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact"
+                            aria-selected="false" style="background: #ffffff; color: black;font-size: 18px;">đã giao
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="pills-tact-tab" data-bs-toggle="pill"
+                            data-bs-target="#pills-huy" type="button" role="tab" aria-controls="pills-contact"
+                            aria-selected="false" style="background: #ffffff; color: black;font-size: 18px;">đã hủy
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="pills-disabled-tab" data-bs-toggle="pill"
+                            data-bs-target="#pills-doiTra" type="button" role="tab" aria-controls="pills-contact"
+                            aria-selected="false" style="background: #ffffff; color: black;font-size: 18px; ">đổi trả
+                    </button>
+                </li>
 
-                <tbody>
-                <tr style="   font-size: 1.4rem;" ng-repeat="hd in HoaDon" id="cart-r" ng-click="getProductById(hd.id)">
-                    <td>{{$index+1}}</td>
-                    <td>
-                        {{hd.ma}}
-                    </td>
-                    <td>
-                        {{hd.tenNguoiNhan}}
-                    </td>
-                    <td>{{hd.ngayTao}}</td>
-                    <td><span> {{hd.tongTien}}</span> <sup>đ</sup>
-                    </td>
-                    <td>{{hd.trangThaiTT ==-1?"hủy":"đang chuẩn bị hàng"}}</td>
-                    <td><button  ng-click="huyHoaDon(hd.id)">hủy</button></td>
-                </tr>
-
-                </tbody>
-            </table>
+            </ul>
 
         </div>
-        <div class="col-7" style="background: #f0f0f0;overflow-y: scroll; height: 500px">
-            <div style="background: white;width: 100%; height: 150px;margin-top: 10px; display: flex" ng-repeat="hds in HoaDons">
-                <img src="{{hds.chiTietSP.hinhAnh}}" alt=""
-                     class="anh" style="    margin-top: 15px;
+
+        <div class="tab-content" id="pills-tabContent">
+            <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab"
+                 tabindex="0">
+
+                <h1 style="text-align: center">Hóa Đơn</h1>
+                <div class="row">
+                    <div class="col-5">
+                        <table class="table table-strip mt-3" style="    margin-top: 30px;    margin-bottom: 160px">
+                            <thead>
+                            <tr style="background-color: #f0f0f0;    font-size: 1.4rem;">
+                                <td>STT</td>
+                                <td>Mã hóa đơn</td>
+                                <td>Tên người nhận</td>
+                                <td>ngày tạo</td>
+                                <td>Tổng tiền</td>
+                                <td>Trạng thái</td>
+                                <td colspan="2">thao tác</td>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            <tr style="   font-size: 1.4rem;" ng-repeat="hd in HoaDon" id="cart-r"
+                                ng-click="getProductById(hd.id)">
+                                <td>{{$index+1}}</td>
+                                <td>
+                                    {{hd.ma}}
+                                </td>
+                                <td>
+                                    {{hd.tenNguoiNhan}}
+                                </td>
+                                <td>{{hd.ngayTao}}</td>
+                                <td><span> {{hd.tongTien}}</span> <sup>đ</sup>
+                                </td>
+                                <td>{{hd.trangThaiTT ==-1?"hủy"
+                                    :hd.trangThaiTT ==0?"chờ xác nhận"
+                                    :hd.trangThaiTT ==1?"đang giao"
+                                    :hd.trangThaiTT ==2?"đã giao"
+                                    :"đổi trả"}}
+                                </td>
+                                <td>
+                                    <button ng-click="huyHoaDon(hd.id)">hủy</button>
+                                </td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+
+                    </div>
+                    <div class="col-7" style="background: #f0f0f0;overflow-y: scroll; height: 500px">
+                        <div style="background: white;width: 100%; height: 150px;margin-top: 10px; display: flex"
+                             ng-repeat="hds in HoaDons">
+                            <img src="{{hds.chiTietSP.hinhAnh}}" alt=""
+                                 class="anh" style="    margin-top: 15px;
     height: 120px;"/>
-                <div class="contes-p" style="padding: 10px;">
-                    <div class="tenSP"><p style="font-size: 2.5rem;"> {{hds.chiTietSP.sanPham.ten}} </p></div>
-                    <div class="pa" style="display: flex">
-                        <div class="slgia" style="width: 100px;">
-                            <div class="sl"><p style="font-size: 1.5rem;">Số Lượng: {{hds.soLuong}} </p></div>
-                            <p style="font-size: 1.5rem;    float: left; margin-right: 5px;"> Giá: </p>  <span
-                                style="font-size: 1.6rem;    float: left;">  {{hds.dongia}}</span> <sup>đ</sup>
-                        </div>
-                        <div class="ngayTao" style="margin-left: 290px;">
-                            <p style="font-size: 1.3rem;"> Ngày Tạo:{{hds.ngayTao}} </p>
-                            <input type="button" name="btn_magiamgia" value="Xem Chi Tiết" class="btn_magiamgia"/>
+                            <div class="contes-p" style="padding: 10px;">
+                                <div class="tenSP"><p style="font-size: 2.5rem;"> {{hds.chiTietSP.sanPham.ten}} </p>
+                                </div>
+                                <div class="pa" style="display: flex">
+                                    <div class="slgia" style="width: 100px;">
+                                        <div class="sl"><p style="font-size: 1.5rem;">Số Lượng: {{hds.soLuong}} </p>
+                                        </div>
+                                        <p style="font-size: 1.5rem;    float: left; margin-right: 5px;"> Giá: </p>
+                                        <span
+                                                style="font-size: 1.6rem;    float: left;">  {{hds.dongia}}</span>
+                                        <sup>đ</sup>
+                                    </div>
+                                    <div class="ngayTao" style="margin-left: 290px;">
+                                        <p style="font-size: 1.3rem;"> Ngày Tạo:{{hds.ngayTao}} </p>
+                                        <input type="button" name="btn_magiamgia" value="Xem Chi Tiết"
+                                               class="btn_magiamgia"/>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
+
+
                 </div>
             </div>
+            <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab"
+                 tabindex="0">
+                <h1 style="text-align: center">Đang Giao</h1>
+                <div class="row">
+                    <div class="col-5">
+                        <table class="table table-strip mt-3" style="    margin-top: 30px;    margin-bottom: 160px">
+                            <thead>
+                            <tr style="background-color: #f0f0f0;    font-size: 1.4rem;">
+                                <td>STT</td>
+                                <td>Mã hóa đơn</td>
+                                <td>Tên người nhận</td>
+                                <td>ngày tạo</td>
+                                <td>Tổng tiền</td>
+                                <td>Trạng thái</td>
+                                <td colspan="2">thao tác</td>
+                            </tr>
+                            </thead>
 
+                            <tbody>
+                            <tr style="   font-size: 1.4rem;" ng-repeat="hd in HoaDondangGiao" id="cart-q"
+                                ng-click="getProductById(hd.id)">
+                                <td>{{$index+1}}</td>
+                                <td>
+                                    {{hd.ma}}
+                                </td>
+                                <td>
+                                    {{hd.tenNguoiNhan}}
+                                </td>
+                                <td>{{hd.ngayTao}}</td>
+                                <td><span> {{hd.tongTien}}</span> <sup>đ</sup>
+                                </td>
+                                <td>{{hd.trangThaiTT ==-1?"hủy"
+                                    :hd.trangThaiTT ==0?"chờ xác nhận"
+                                    :hd.trangThaiTT ==1?"đang giao"
+                                    :hd.trangThaiTT ==2?"đã giao"
+                                    :"đổi trả"}}
+                                </td>
+                                <td>
+                                    <button ng-click="huyHoaDon(hd.id)">hủy</button>
+                                </td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+
+                    </div>
+                    <div class="col-7" style="background: #f0f0f0;overflow-y: scroll; height: 500px">
+                        <div style="background: white;width: 100%; height: 150px;margin-top: 10px; display: flex"
+                             ng-repeat="hds in HoaDons">
+                            <img src="{{hds.chiTietSP.hinhAnh}}" alt=""
+                                 class="anh" style="    margin-top: 15px;
+    height: 120px;"/>
+                            <div class="contes-p" style="padding: 10px;">
+                                <div class="tenSP"><p style="font-size: 2.5rem;"> {{hds.chiTietSP.sanPham.ten}} </p>
+                                </div>
+                                <div class="pa" style="display: flex">
+                                    <div class="slgia" style="width: 100px;">
+                                        <div class="sl"><p style="font-size: 1.5rem;">Số Lượng: {{hds.soLuong}} </p>
+                                        </div>
+                                        <p style="font-size: 1.5rem;    float: left; margin-right: 5px;"> Giá: </p>
+                                        <span
+                                                style="font-size: 1.6rem;    float: left;">  {{hds.dongia}}</span>
+                                        <sup>đ</sup>
+                                    </div>
+                                    <div class="ngayTao" style="margin-left: 290px;">
+                                        <p style="font-size: 1.3rem;"> Ngày Tạo:{{hds.ngayTao}} </p>
+                                        <input type="button" name="btn_magiamgia" value="Xem Chi Tiết"
+                                               class="btn_magiamgia"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-con-tab"
+                 tabindex="0">
+                <h1 style="text-align: center">Đã giao</h1>
+                <div class="row">
+                    <div class="col-5">
+                        <table class="table table-strip mt-3" style="    margin-top: 30px;    margin-bottom: 160px">
+                            <thead>
+                            <tr style="background-color: #f0f0f0;    font-size: 1.4rem;">
+                                <td>STT</td>
+                                <td>Mã hóa đơn</td>
+                                <td>Tên người nhận</td>
+                                <td>ngày tạo</td>
+                                <td>Tổng tiền</td>
+                                <td>Trạng thái</td>
+                                <td colspan="2">thao tác</td>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            <tr style="   font-size: 1.4rem;" ng-repeat="hd in HoaDonDaGiao" id="cart-e"
+                                ng-click="getProductById(hd.id)">
+                                <td>{{$index+1}}</td>
+                                <td>
+                                    {{hd.ma}}
+                                </td>
+                                <td>
+                                    {{hd.tenNguoiNhan}}
+                                </td>
+                                <td>{{hd.ngayTao}}</td>
+                                <td><span> {{hd.tongTien}}</span> <sup>đ</sup>
+                                </td>
+                                <td>{{hd.trangThaiTT ==-1?"hủy"
+                                    :hd.trangThaiTT ==0?"chờ xác nhận"
+                                    :hd.trangThaiTT ==1?"đang giao"
+                                    :hd.trangThaiTT ==2?"đã giao"
+                                    :"đổi trả"}}
+                                </td>
+                                <td>
+                                    <button ng-click="huyHoaDon(hd.id)">hủy</button>
+                                </td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+
+                    </div>
+                    <div class="col-7" style="background: #f0f0f0;overflow-y: scroll; height: 500px">
+                        <div style="background: white;width: 100%; height: 150px;margin-top: 10px; display: flex"
+                             ng-repeat="hds in HoaDons">
+                            <img src="{{hds.chiTietSP.hinhAnh}}" alt=""
+                                 class="anh" style="    margin-top: 15px;
+    height: 120px;"/>
+                            <div class="contes-p" style="padding: 10px;">
+                                <div class="tenSP"><p style="font-size: 2.5rem;"> {{hds.chiTietSP.sanPham.ten}} </p>
+                                </div>
+                                <div class="pa" style="display: flex">
+                                    <div class="slgia" style="width: 100px;">
+                                        <div class="sl"><p style="font-size: 1.5rem;">Số Lượng: {{hds.soLuong}} </p>
+                                        </div>
+                                        <p style="font-size: 1.5rem;    float: left; margin-right: 5px;"> Giá: </p>
+                                        <span
+                                                style="font-size: 1.6rem;    float: left;">  {{hds.dongia}}</span>
+                                        <sup>đ</sup>
+                                    </div>
+                                    <div class="ngayTao" style="margin-left: 290px;">
+                                        <p style="font-size: 1.3rem;"> Ngày Tạo:{{hds.ngayTao}} </p>
+                                        <input type="button" name="btn_magiamgia" value="Xem Chi Tiết"
+                                               class="btn_magiamgia"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="tab-pane fade" id="pills-huy" role="tabpanel" aria-labelledby="pills-tact-tab"
+                 tabindex="0">
+                <h1 style="text-align: center">Đã Hủy</h1>
+                <div class="row">
+                    <div class="col-5">
+                        <table class="table table-strip mt-3" style="    margin-top: 30px;    margin-bottom: 160px">
+                            <thead>
+                            <tr style="background-color: #f0f0f0;    font-size: 1.4rem;">
+                                <td>STT</td>
+                                <td>Mã hóa đơn</td>
+                                <td>Tên người nhận</td>
+                                <td>ngày tạo</td>
+                                <td>Tổng tiền</td>
+                                <td>Trạng thái</td>
+                                <td colspan="2">thao tác</td>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            <tr style="   font-size: 1.4rem;" ng-repeat="hd in HoaDonDaHuy" id="cart-a"
+                                ng-click="getProductById(hd.id)">
+                                <td>{{$index+1}}</td>
+                                <td>
+                                    {{hd.ma}}
+                                </td>
+                                <td>
+                                    {{hd.tenNguoiNhan}}
+                                </td>
+                                <td>{{hd.ngayTao}}</td>
+                                <td><span> {{hd.tongTien}}</span> <sup>đ</sup>
+                                </td>
+                                <td>{{hd.trangThaiTT ==-1?"hủy"
+                                    :hd.trangThaiTT ==0?"chờ xác nhận"
+                                    :hd.trangThaiTT ==1?"đang giao"
+                                    :hd.trangThaiTT ==2?"đã giao"
+                                    :"đổi trả"}}
+                                </td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+
+                    </div>
+                    <div class="col-7" style="background: #f0f0f0;overflow-y: scroll; height: 500px">
+                        <div style="background: white;width: 100%; height: 150px;margin-top: 10px; display: flex"
+                             ng-repeat="hds in HoaDons">
+                            <img src="{{hds.chiTietSP.hinhAnh}}" alt=""
+                                 class="anh" style="    margin-top: 15px;
+    height: 120px;"/>
+                            <div class="contes-p" style="padding: 10px;">
+                                <div class="tenSP"><p style="font-size: 2.5rem;"> {{hds.chiTietSP.sanPham.ten}} </p>
+                                </div>
+                                <div class="pa" style="display: flex">
+                                    <div class="slgia" style="width: 100px;">
+                                        <div class="sl"><p style="font-size: 1.5rem;">Số Lượng: {{hds.soLuong}} </p>
+                                        </div>
+                                        <p style="font-size: 1.5rem;    float: left; margin-right: 5px;"> Giá: </p>
+                                        <span
+                                                style="font-size: 1.6rem;    float: left;">  {{hds.dongia}}</span>
+                                        <sup>đ</sup>
+                                    </div>
+                                    <div class="ngayTao" style="margin-left: 290px;">
+                                        <p style="font-size: 1.3rem;"> Ngày Tạo:{{hds.ngayTao}} </p>
+                                        <input type="button" name="btn_magiamgia" value="Xem Chi Tiết"
+                                               class="btn_magiamgia"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="tab-pane fade" id="pills-doiTra" role="tabpanel" aria-labelledby="pills-disabled-tab"
+                 tabindex="0">
+                <h1 style="text-align: center">Đổi Trả</h1>
+                <div class="row">
+                    <div class="col-5">
+                        <table class="table table-strip mt-3" style="    margin-top: 30px;    margin-bottom: 160px">
+                            <thead>
+                            <tr style="background-color: #f0f0f0;    font-size: 1.4rem;">
+                                <td>STT</td>
+                                <td>Mã hóa đơn</td>
+                                <td>Tên người nhận</td>
+                                <td>ngày tạo</td>
+                                <td>Tổng tiền</td>
+                                <td>Trạng thái</td>
+                                <td colspan="2">thao tác</td>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            <tr style="   font-size: 1.4rem;" ng-repeat="hd in HoaDonDaDoiTra" id="cart-s"
+                                ng-click="getProductById(hd.id)">
+                                <td>{{$index+1}}</td>
+                                <td>
+                                    {{hd.ma}}
+                                </td>
+                                <td>
+                                    {{hd.tenNguoiNhan}}
+                                </td>
+                                <td>{{hd.ngayTao}}</td>
+                                <td><span> {{hd.tongTien}}</span> <sup>đ</sup>
+                                </td>
+                                <td>{{hd.trangThaiTT ==-1?"hủy"
+                                    :hd.trangThaiTT ==0?"chờ xác nhận"
+                                    :hd.trangThaiTT ==1?"đang giao"
+                                    :hd.trangThaiTT ==2?"đã giao"
+                                    :"đổi trả"}}
+                                </td>
+
+                            </tr>
+
+                            </tbody>
+                        </table>
+
+                    </div>
+                    <div class="col-7" style="background: #f0f0f0;overflow-y: scroll; height: 500px">
+                        <div style="background: white;width: 100%; height: 150px;margin-top: 10px; display: flex"
+                             ng-repeat="hds in HoaDons">
+                            <img src="{{hds.chiTietSP.hinhAnh}}" alt=""
+                                 class="anh" style="    margin-top: 15px;
+    height: 120px;"/>
+                            <div class="contes-p" style="padding: 10px;">
+                                <div class="tenSP"><p style="font-size: 2.5rem;"> {{hds.chiTietSP.sanPham.ten}} </p>
+                                </div>
+                                <div class="pa" style="display: flex">
+                                    <div class="slgia" style="width: 100px;">
+                                        <div class="sl"><p style="font-size: 1.5rem;">Số Lượng: {{hds.soLuong}} </p>
+                                        </div>
+                                        <p style="font-size: 1.5rem;    float: left; margin-right: 5px;"> Giá: </p>
+                                        <span
+                                                style="font-size: 1.6rem;    float: left;">  {{hds.dongia}}</span>
+                                        <sup>đ</sup>
+                                    </div>
+                                    <div class="ngayTao" style="margin-left: 290px;">
+                                        <p style="font-size: 1.3rem;"> Ngày Tạo:{{hds.ngayTao}} </p>
+                                        <input type="button" name="btn_magiamgia" value="Xem Chi Tiết"
+                                               class="btn_magiamgia"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
         </div>
+
+
     </div>
 
 </div>
