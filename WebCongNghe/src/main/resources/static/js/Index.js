@@ -7,6 +7,7 @@ app.config(function ($routeProvider, $locationProvider) {
         .when("/ourStores", {templateUrl: "/view/SearchOurStore"})
         .when("/gioHang", {templateUrl: "/view/gioHang", controller: gioHangController})
         .when("/bill", {templateUrl: "/view/bill", controller: billController})
+        .when("/billAdmin", {templateUrl: "/Admin/billAdmin", controller: billAdminController})
         .otherwise({redirectTo: "home"});
 
 });

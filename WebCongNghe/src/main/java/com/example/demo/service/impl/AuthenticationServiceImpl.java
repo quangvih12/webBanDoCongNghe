@@ -1,14 +1,14 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.request.AuthenticationRequest;
-import com.example.demo.request.AuthenticationResponse;
-import com.example.demo.request.RegisterRequest;
 import com.example.demo.entity.KhachHang;
 import com.example.demo.entity.Role;
 import com.example.demo.entity.Token;
 import com.example.demo.entity.TokenType;
 import com.example.demo.reponstory.KhachHangReponsitory;
 import com.example.demo.reponstory.TokenRepository;
+import com.example.demo.request.AuthenticationRequest;
+import com.example.demo.request.AuthenticationResponse;
+import com.example.demo.request.RegisterRequest;
 import com.example.demo.service.AuthenticationService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -17,9 +17,12 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 @Service
 @RequiredArgsConstructor
+@SessionAttributes("myAttribute")
 public class AuthenticationServiceImpl implements AuthenticationService {
     private final KhachHangReponsitory repository;
     private final TokenRepository tokenRepository;
@@ -27,6 +30,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     private final JwtServiceImpl jwtService;
     private final AuthenticationManager authenticationManager;
     private static Integer currentLoginId;
+
 
     @Override
     public AuthenticationResponse register(RegisterRequest request) {
@@ -47,7 +51,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
 
     @Override
-    public AuthenticationResponse authenticate(AuthenticationRequest request, HttpSession session) {
+    public AuthenticationResponse authenticate(AuthenticationRequest request, HttpSession session, Model model) {
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
         } catch (AuthenticationException e) {
@@ -60,7 +64,9 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
         // lay ra id khach hang
         currentLoginId = khachHang.getId();
-
+        session.setAttribute("userDetails", khachHang.getTen());
+//        String value = (String) session.getAttribute("userDetails");
+//        System.out.println(value);
         revokeAllUserTokens(khachHang);
         return AuthenticationResponse.builder()
                 .token(jwtToken)
@@ -93,4 +99,5 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     public static Integer getCurrentLoginId() {
         return currentLoginId;
     }
+
 }

@@ -43,12 +43,14 @@ public class SecurityConfig {
                         "/logout",
                         "/tests",
                         "/view/**",
+                        "/Admin/**",
                         "/api/v1/auth/**",
                         "/js/**", "/css/**",
                         "/img/**",
                         "/api/product/**",
                         "/api/gioHang/**",
                         "/api/hoaDon/**",
+                        "/api/BillAdmin/**",
                         "/api/hoaDonD/**"
                 )
                 .permitAll()
@@ -68,7 +70,7 @@ public class SecurityConfig {
                 .addLogoutHandler(logoutHandler)
                 .logoutSuccessHandler((request, response, authentication) -> SecurityContextHolder.clearContext())
                 .and().oauth2Login().loginPage("/login")
-               .successHandler(successHandler);
+                .successHandler(successHandler);
 
 
         return http.build();

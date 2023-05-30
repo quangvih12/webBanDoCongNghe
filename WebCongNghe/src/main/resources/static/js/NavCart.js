@@ -3,11 +3,25 @@ let API = "/api/gioHang/getAll"
 let APII = "/api/gioHang"
 let ViewOurStore = "#ourStore"
 $(document).ready(function () { //thực hiện các mã js khi trang Mô hình đối tượng tài liệu (DOM) đã sẵn sàng
-    $("#sinh_vien_error").text("");
     loadData(); //gọi hàm loadData() ra để thực thi
-
-
+    Upten();
 });
+
+function Upten() {
+    $.ajax({
+        type: "GET",
+        contentType: "application/json",
+        url: "/api/v1/auth/session",
+        success: function (responseData) {
+
+             console.log(responseData)
+        },
+        error: function (e) {
+            console.log("ERROR : ", e);
+        }
+    });
+}
+
 
 function loadData() {
     $.ajax({
@@ -28,19 +42,18 @@ function loadData() {
 
                 document.getElementById('total-price').textContent = tutals;
                 document.getElementById('span-tutal').textContent = tutals;
-
-                // lay ra ten trong sesion sau dó add do header
-                const username = sessionStorage.getItem('ten');
-                const usernameElement = document.getElementById('username');
-                if (username === null) {
-                    usernameElement.textContent = '  log in My Account';
-                } else if (usernameElement !== null) {
-                    usernameElement.textContent = username;
-                    // console.log(usernameElement.textContent)
-                } else {
-                    console.log('bug bug bug')
-                }
-
+                // // lay ra ten trong sesion sau dó add do header
+                // const username = sessionStorage.getItem('userDetails');
+                // console.log(username);
+                // const usernameElement = document.getElementById('username');
+                // if (username === null) {
+                //     usernameElement.textContent = '  log in My Account';
+                // } else if (usernameElement !== null) {
+                //     usernameElement.textContent = username;
+                //     // console.log(usernameElement.textContent)
+                // } else {
+                //     console.log('bug bug bug')
+                // }
 
                 return `
                  <div class="cart-box" >

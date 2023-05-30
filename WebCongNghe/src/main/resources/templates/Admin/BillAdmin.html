@@ -1,0 +1,159 @@
+<button class="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling"
+        aria-controls="offcanvasScrolling" style="display: block; margin-top: 175px">
+    <i class="bi bi-chevron-double-right"></i>
+</button>
+
+<div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1"
+     id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel" style="width: 190px; top: 160px">
+    <div class="offcanvas-header">
+        <h6 class="offcanvas-title" id="offcanvasScrollingLabel" style="font-size: 2rem">DANH MỤC</h6>
+        <button type="button" class="btn" data-bs-dismiss="offcanvas" aria-label="Close">
+            <i class="bi bi-chevron-double-left"></i>
+        </button>
+    </div>
+
+    <div class="d-flex align-items-start">
+        <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+            <button class="nav-link active" id="v-pills-home-tab" data-bs-toggle="pill" data-bs-target="#v-pills-home"
+                    type="button" role="tab" aria-controls="v-pills-home" aria-selected="true"
+                    style="margin-bottom: 33px; margin-top: 33px;font-size: 1.6rem;margin-left:30px">
+                All Sản phẩm
+            </button>
+            <button class="nav-link" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile"
+                    type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false"
+                    style="margin-left:30px;margin-bottom: 33px;font-size: 1.6rem">
+                Thêm sản phẩm
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="tab-content" id="v-pills-tabContent">
+
+    <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab" tabindex="0">
+        <div style="text-align: center;"><h1> Thêm mới </h1></div>
+        <div class="container">
+
+
+        </div>
+    </div>
+
+    <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab"
+         tabindex="0">
+        <div class="container">
+            <div class="row">
+                <div class="tieu-de" style="width: 150%; height: 150px; padding: 0px 0px 0px 45px;">
+                    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist" style="margin: 50px 00px 0px 400px;">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill"
+                                    data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home"
+                                    aria-selected="true" style="background: #ffffff; color: black;font-size: 18px;">chờ
+                                xác nhận
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill"
+                                    data-bs-target="#pills-profile" type="button" role="tab"
+                                    aria-controls="pills-profile"
+                                    aria-selected="false" style="background: #ffffff; color: black;font-size: 18px;">
+                                đang giao
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="pills-con-tab" data-bs-toggle="pill"
+                                    data-bs-target="#pills-contact" type="button" role="tab"
+                                    aria-controls="pills-contact"
+                                    aria-selected="false" style="background: #ffffff; color: black;font-size: 18px;">đã
+                                giao
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="pills-tact-tab" data-bs-toggle="pill"
+                                    data-bs-target="#pills-huy" type="button" role="tab" aria-controls="pills-contact"
+                                    aria-selected="false" style="background: #ffffff; color: black;font-size: 18px;">đã
+                                hủy
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="pills-disabled-tab" data-bs-toggle="pill"
+                                    data-bs-target="#pills-doiTra" type="button" role="tab"
+                                    aria-controls="pills-contact"
+                                    aria-selected="false" style="background: #ffffff; color: black;font-size: 18px; ">
+                                đổi trả
+                            </button>
+                        </li>
+
+                    </ul>
+
+                </div>
+                <div class="tab-content" id="pills-tabContent">
+                    <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
+                         aria-labelledby="pills-home-tab"
+                         tabindex="0">
+                        <h1 style="text-align: center">Xác nhận hóa đơn </h1>
+                        <div class="row">
+                            <div class="col-5">
+                                <table class="table table-strip mt-3"
+                                       style="    margin-top: 30px;    margin-bottom: 160px">
+                                    <thead>
+                                    <tr style="background-color: #f0f0f0;    font-size: 1.4rem;">
+                                        <td>STT</td>
+                                        <td>Mã hóa đơn</td>
+                                        <td>Tên người nhận</td>
+                                        <td>ngày tạo</td>
+                                        <td>Tổng tiền</td>
+                                        <td>Trạng thái</td>
+                                        <td colspan="2">thao tác</td>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody>
+                                    <tr style="   font-size: 1.4rem;" ng-repeat="hd in Bill" id="cart-q"
+                                        ng-click="getProductById(hd.id)">
+                                        <td>{{$index+1}}</td>
+                                        <td>
+                                            {{hd.ma}}
+                                        </td>
+                                        <td>
+                                            {{hd.tenNguoiNhan}}
+                                        </td>
+                                        <td>{{hd.ngayTao}}</td>
+                                        <td><span> {{hd.tongTien}}</span> <sup>đ</sup>
+                                        </td>
+                                        <td>{{hd.trangThaiTT ==-1?"hủy"
+                                            :hd.trangThaiTT ==0?"chờ xác nhận"
+                                            :hd.trangThaiTT ==1?"đang giao"
+                                            :hd.trangThaiTT ==2?"đã giao"
+                                            :"đổi trả"}}
+                                        </td>
+                                        <td>
+                                            <button ng-click="XacNhanHoaDon(hd.id)">Xác Nhận Đơn Hàng</button>
+                                        </td>
+                                    </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab"
+                         tabindex="0">
+                        <h1 style="text-align: center">Đang giao </h1>
+                    </div>
+                    <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-con-tab"
+                         tabindex="0"><h1 style="text-align: center">Đã giao </h1>
+                    </div>
+                    <div class="tab-pane fade" id="pills-huy" role="tabpanel" aria-labelledby="pills-tact-tab"
+                         tabindex="0">
+                        <h1 style="text-align: center">Đã hủy</h1>
+                    </div>
+                    <div class="tab-pane fade" id="pills-doiTra" role="tabpanel" aria-labelledby="pills-disabled-tab"
+                         tabindex="0">
+                        <h1 style="text-align: center">Đổi trả</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
