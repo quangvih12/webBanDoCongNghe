@@ -2,6 +2,7 @@ package com.example.demo.config;
 
 import com.example.demo.Authentication.JwtAuthenticationTokenFilter;
 
+import com.example.demo.entity.Role;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -50,10 +51,11 @@ public class SecurityConfig {
                         "/api/product/**",
                         "/api/gioHang/**",
                         "/api/hoaDon/**",
-                        "/api/BillAdmin/**",
+                        "/api/BillAdmin/**","/api/productAdmin/**",
                         "/api/hoaDonD/**"
                 )
                 .permitAll()
+//                .requestMatchers("/api/BillAdmin/**", "/api/productAdmin/**").hasRole("ADMIN")
                 .anyRequest()
                 .authenticated().and()
                 .sessionManagement()

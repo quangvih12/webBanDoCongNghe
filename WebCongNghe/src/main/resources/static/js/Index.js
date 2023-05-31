@@ -13,7 +13,6 @@ app.config(function ($routeProvider, $locationProvider) {
 });
 
 app.controller('HomeController', function ($scope, $http) {
-
 }).filter('startFrom', function () { // phan trang
     return function (input, start) {
         start = +start; //parse to int

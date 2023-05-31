@@ -11,6 +11,7 @@ window.billController = function ($scope, $http) {
     $http.get("http://localhost:8080/api/hoaDonD/home/" + $scope.trangThaiTT)
         .then(function (responseData) {
                 $scope.HoaDon = responseData.data;
+                console.log(responseData.data);
             },
             function (error) {
                 console.log(error);

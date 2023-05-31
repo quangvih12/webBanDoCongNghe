@@ -14,7 +14,17 @@ function Upten() {
         url: "/api/v1/auth/session",
         success: function (responseData) {
 
-             console.log(responseData)
+            console.log(responseData)
+
+            const usernameElement = document.getElementById('username');
+            if (responseData === null) {
+                usernameElement.textContent = '  log in My Account';
+            } else if (usernameElement !== null) {
+                usernameElement.textContent = responseData;
+                // console.log(usernameElement.textContent)
+            } else {
+                console.log('bug bug bug')
+            }
         },
         error: function (e) {
             console.log("ERROR : ", e);
@@ -42,19 +52,6 @@ function loadData() {
 
                 document.getElementById('total-price').textContent = tutals;
                 document.getElementById('span-tutal').textContent = tutals;
-                // // lay ra ten trong sesion sau dó add do header
-                // const username = sessionStorage.getItem('userDetails');
-                // console.log(username);
-                // const usernameElement = document.getElementById('username');
-                // if (username === null) {
-                //     usernameElement.textContent = '  log in My Account';
-                // } else if (usernameElement !== null) {
-                //     usernameElement.textContent = username;
-                //     // console.log(usernameElement.textContent)
-                // } else {
-                //     console.log('bug bug bug')
-                // }
-
                 return `
                  <div class="cart-box" >
                    <img src="${item.chiTietSP.hinhAnh}" alt="" class="cart-img" />

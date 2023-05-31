@@ -1,11 +1,11 @@
-window.HomeController = function ($scope, $http) {
+window.HomeController = function ($scope, $http,$rootScope) {
     $scope.sanPham = [];
     $scope.currentPage = 0;
     $scope.pageSize = 16;
     $scope.sanPham4 = [];
     $scope.sanPhamSpecial = [];
     $scope.sanPhamPopular = [];
-
+    console.log( "login: "+$rootScope.isLoggedIn);
 
     $http.get("http://localhost:8080/api/product/getAll")
         .then(function (response) {

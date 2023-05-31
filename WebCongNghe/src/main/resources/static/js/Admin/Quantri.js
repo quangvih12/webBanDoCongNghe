@@ -1,5 +1,11 @@
 window.billAdminController = function ($scope, $http) {
     $scope.Bill = [];
+    $scope.product = [];
+    $scope.totalPagess = [1,2,3];
+    $scope.totalPages = [];
+    $scope.page = 0;
+    $scope.size = 10;
+
     $http.get("http://localhost:8080/api/BillAdmin/" + 0)
         .then(function (responseData) {
                 $scope.Bill = responseData.data;
@@ -9,7 +15,27 @@ window.billAdminController = function ($scope, $http) {
                 console.log(error);
             });
 
-
+    // quan tri san pham
+    $http.get("http://localhost:8080/api/productAdmin?page=" + $scope.page + "&size=" + $scope.size)
+        .then(function (responseData) {
+                $scope.product = responseData.data.content;
+                // $scope.totalPages = responseData.data.totalPages;
+                for (var i = 1; i <=responseData.data.totalPages-1; i++) {
+                    $scope.totalPages.push(i);
+                }
+            },
+            function (error) {
+                console.log(error);
+            });
+    $scope.goToPage = function (page) {
+        $http.get("http://localhost:8080/api/productAdmin?page=" + page + "&size=" + $scope.size)
+            .then(function (responseData) {
+                    $scope.product = responseData.data.content;
+                },
+                function (error) {
+                    console.log(error);
+                });
+    }
     $scope.XacNhanHoaDon = function (id) {
         $http.put("http://localhost:8080/api/BillAdmin/xacNhanHoaDon/" + id, {
             trangThaiTT: 1
@@ -36,12 +62,11 @@ window.billAdminController = function ($scope, $http) {
                             });
 
                     }
-
-
                 },
                 function (error) {
                     console.log(error);
                 });
     }
+
 
 }
