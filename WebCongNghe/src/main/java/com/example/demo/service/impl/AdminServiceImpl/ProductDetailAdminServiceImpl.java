@@ -15,7 +15,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 
@@ -32,6 +34,8 @@ public class ProductDetailAdminServiceImpl implements ProductDetailAdminService 
 
     @Autowired
     private LoginGoogleServiceImpl loginGoogleService;
+    @Autowired
+    private ExcelUploadServiceImpl excelUploadService;
 
     @Override
     public Page<ChiTietSanPham> getAll(Integer page, Integer size) {
@@ -52,5 +56,17 @@ public class ProductDetailAdminServiceImpl implements ProductDetailAdminService 
             return emptyPage;
         }
 
+    }
+
+    public void saveCustomersToDatabase(MultipartFile file){
+        if(ExcelUploadServiceImpl.isValidExcelFile(file)){
+            try {
+                List<ChiTietSanPham> customers = excelUploadService.getCustomersDataFromExcel(file.getInputStream());
+
+//                this.productDetailAdminRepository.saveAll(customers);
+            } catch (IOException e) {
+                throw new IllegalArgumentException("The file is not a valid excel file");
+            }
+        }
     }
 }
