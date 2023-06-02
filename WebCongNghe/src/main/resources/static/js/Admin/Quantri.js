@@ -1,4 +1,4 @@
-window.billAdminController = function ($scope, $http,Upload) {
+window.billAdminController = function ($scope, $http, Upload) {
     $scope.Bill = [];
     $scope.product = [];
     $scope.totalPagess = [1, 2, 3];
@@ -69,20 +69,26 @@ window.billAdminController = function ($scope, $http,Upload) {
     }
 
     $scope.UploadExcel = function () {
-        console.log("data:  "+$scope.fileList)
-            if ($scope.fileList) {
-                Upload.upload({
-                    url: 'http://localhost:8080/api/productAdmin/upload-ChiTietSp-data',
-                    data: { file: $scope.fileList[0]}
-                }).then(function(response) {
-                    // Xử lý thành công
-                    console.log("data:  "+response.data);
-                }, function(error) {
-                    // Xử lý lỗi
-                    console.log(error);
-                });
-            }
-        };
+        if ($scope.fileList) {
+            Upload.upload({
+                url: 'http://localhost:8080/api/productAdmin/upload-ChiTietSp-data',
+                data: {file: $scope.fileList[0]}
+            }).then(function (response) {
+                if (response.data.statusCode == "error") {
+                    swal.fire({
+                        icon: 'success',
+                        title: response.data.data
+                    })
+                        .then((value) => {
+                            window.open("#billAdmin", '_self');
+                        });
+                }
+            }, function (error) {
+                // Xử lý lỗi
+                console.log(error);
+            });
+        }
+    };
 
 
 }

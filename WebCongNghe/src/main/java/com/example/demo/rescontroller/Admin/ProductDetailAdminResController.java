@@ -2,6 +2,7 @@ package com.example.demo.rescontroller.Admin;
 
 
 import com.example.demo.service.impl.AdminServiceImpl.ProductDetailAdminServiceImpl;
+import com.example.demo.util.DataUltil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.Map;
+import java.util.HashMap;
 
 @RestController
 @RequestMapping("/api/productAdmin")
@@ -30,6 +31,7 @@ public class ProductDetailAdminResController {
     @PostMapping("/upload-ChiTietSp-data")
     public ResponseEntity<?> uploadCustomersData(@RequestParam("file") MultipartFile file) {
         this.productDetailAdminService.saveCustomersToDatabase(file);
-        return ResponseEntity.ok(Map.of("sussce", " thêm sản phẩm thành công"));
+        HashMap<String, Object> map = DataUltil.setData("error", " thêm sản phẩm thành công");
+        return ResponseEntity.ok(map);
     }
 }

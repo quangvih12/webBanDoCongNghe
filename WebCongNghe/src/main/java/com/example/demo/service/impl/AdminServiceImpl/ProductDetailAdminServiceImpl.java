@@ -58,12 +58,15 @@ public class ProductDetailAdminServiceImpl implements ProductDetailAdminService 
 
     }
 
-    public void saveCustomersToDatabase(MultipartFile file){
-        if(ExcelUploadServiceImpl.isValidExcelFile(file)){
+    public void saveCustomersToDatabase(MultipartFile file) {
+        if (ExcelUploadServiceImpl.isValidExcelFile(file)) {
             try {
                 List<ChiTietSanPham> customers = excelUploadService.getCustomersDataFromExcel(file.getInputStream());
+                customers.stream().forEach(chiTietSanPham -> {
+                    chiTietSanPham.setMa("CTSP" + chiTietSanPham.getId());
+                });
+                this.productDetailAdminRepository.saveAll(customers);
 
-//                this.productDetailAdminRepository.saveAll(customers);
             } catch (IOException e) {
                 throw new IllegalArgumentException("The file is not a valid excel file");
             }
