@@ -1,7 +1,7 @@
-window.billAdminController = function ($scope, $http) {
+window.billAdminController = function ($scope, $http,Upload) {
     $scope.Bill = [];
     $scope.product = [];
-    $scope.totalPagess = [1,2,3];
+    $scope.totalPagess = [1, 2, 3];
     $scope.totalPages = [];
     $scope.page = 0;
     $scope.size = 10;
@@ -9,7 +9,7 @@ window.billAdminController = function ($scope, $http) {
     $http.get("http://localhost:8080/api/BillAdmin/" + 0)
         .then(function (responseData) {
                 $scope.Bill = responseData.data;
-                console.log(responseData.data);
+                // console.log(responseData.data);
             },
             function (error) {
                 console.log(error);
@@ -20,7 +20,7 @@ window.billAdminController = function ($scope, $http) {
         .then(function (responseData) {
                 $scope.product = responseData.data.content;
                 // $scope.totalPages = responseData.data.totalPages;
-                for (var i = 1; i <=responseData.data.totalPages-1; i++) {
+                for (var i = 1; i <= responseData.data.totalPages - 1; i++) {
                     $scope.totalPages.push(i);
                 }
             },
@@ -67,6 +67,22 @@ window.billAdminController = function ($scope, $http) {
                     console.log(error);
                 });
     }
+
+    $scope.UploadExcel = function () {
+        console.log("data:  "+$scope.fileList)
+            if ($scope.fileList) {
+                Upload.upload({
+                    url: 'http://localhost:8080/api/productAdmin/upload-ChiTietSp-data',
+                    data: { file: $scope.fileList[0]}
+                }).then(function(response) {
+                    // Xử lý thành công
+                    console.log("data:  "+response.data);
+                }, function(error) {
+                    // Xử lý lỗi
+                    console.log(error);
+                });
+            }
+        };
 
 
 }

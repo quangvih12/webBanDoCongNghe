@@ -328,11 +328,11 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <input type="file" select-ng-files ng-model="fileArray" multiple/>
+                <input type="file" select-ng-files ng-model="fileList">
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Thêm</button>
+                <button type="button" class="btn btn-primary" ng-click="UploadExcel()">Thêm</button>
             </div>
         </div>
     </div>

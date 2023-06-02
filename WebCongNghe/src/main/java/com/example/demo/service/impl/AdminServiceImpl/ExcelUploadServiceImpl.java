@@ -16,8 +16,6 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -120,17 +118,17 @@ public class ExcelUploadServiceImpl {
                 System.out.println("Workbook is null. Không thể đọc dữ liệu từ Excel.");
             }
 //            listChiTietSp.forEach(o -> System.out.println(
-//                    "sp: "+o.getSanPham().getId()
-//                    + "dsp: "+o.getDongsp().getId()
-//                    +"ms: "+o.getMauSac().getId()
-//                    +"th: "+o.getThuongHieu().getId()
-//                    +"nsx: "+o.getNSX().getId()
-//                    +"gB: "+o.getGiaBan()
-//                    +"gN: "+o.getGiaNhap()
-//                    +"ha: "+o.getHinhAnh()
-//                    +" sl: "+o.getSoLuongTon()
-//                    +"tt: "+o.getTrangThai()
-//                    +"mt: "+o.getMoTa()
+//                    "sp: " + o.getSanPham().getId()
+//                            + "dsp: " + o.getDongsp().getId()
+//                            + "ms: " + o.getMauSac().getId()
+//                            + "th: " + o.getThuongHieu().getId()
+//                            + "nsx: " + o.getNSX().getId()
+//                            + "gB: " + o.getGiaBan()
+//                            + "gN: " + o.getGiaNhap()
+//                            + "ha: " + o.getHinhAnh()
+//                            + " sl: " + o.getSoLuongTon()
+//                            + "tt: " + o.getTrangThai()
+//                            + "mt: " + o.getMoTa()
 //
 //            ));
         } catch (IOException e) {

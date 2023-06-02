@@ -1,4 +1,4 @@
-var app = angular.module("myApp", ["ngRoute"]);
+var app = angular.module("myApp", ["ngRoute", "ngFileUpload"]);
 app.config(function ($routeProvider, $locationProvider) {
     $locationProvider.hashPrefix("");
     $routeProvider.when("/home", {templateUrl: "/view/home", controller: HomeController})
@@ -10,6 +10,18 @@ app.config(function ($routeProvider, $locationProvider) {
         .when("/billAdmin", {templateUrl: "/Admin/billAdmin", controller: billAdminController})
         .otherwise({redirectTo: "home"});
 
+});
+
+angular.module("myApp").directive("selectNgFiles", function () {
+    return {
+        require: "ngModel",
+        link: function postLink(scope, elem, attrs, ngModel) {
+            elem.on("change", function (e) {
+                var files = elem[0].files;
+                ngModel.$setViewValue(files);
+            })
+        }
+    }
 });
 
 app.controller('HomeController', function ($scope, $http) {
