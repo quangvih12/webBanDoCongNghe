@@ -1,5 +1,6 @@
 package com.example.demo.service.impl;
 
+import com.example.demo.entity.Cart;
 import com.example.demo.entity.ChiTietSanPham;
 import com.example.demo.entity.GioHang;
 import com.example.demo.entity.GioHangChiTiet;
@@ -10,12 +11,12 @@ import com.example.demo.reponstory.ProductReponstory;
 import com.example.demo.service.CartDetailService;
 import com.example.demo.util.DataUltil;
 import com.example.demo.util.DatetimeUtil;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.security.Principal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -39,46 +40,11 @@ public class CartDetailServiceImpl implements CartDetailService {
 
     @Autowired
     private ProductReponstory productReponstory;
-
+    private List<GioHangChiTiet> listGioHang = new ArrayList<>();
 
     @Override
     // find all theo id khach hang
-    public ResponseEntity<List<GioHangChiTiet>> getAll() {
-        try {
-            List<GioHangChiTiet> listGioHang = new ArrayList<>();
-            int idKh;
-            if (authenticationService.getCurrentLoginId() != null) {
-                idKh = authenticationService.getCurrentLoginId();
-            } else {
-                idKh = loginGoogleService.getIdUser();
-            }
-            gioHangCTRespon.findAllByTen(idKh).forEach(listGioHang::add);
-            if (listGioHang.isEmpty()) {
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-            } else {
-                return new ResponseEntity<>(listGioHang, HttpStatus.OK);
-            }
-        } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
-    @Override
-    //them vao gio hang
-    public void createGioHangCT(Integer idSanPHamCT, Integer soLuong) {
-        if (soLuong <= 0) {
-            System.out.println("soLuong ko <= 0");
-        } else {
-            int idKh = authenticationService.getCurrentLoginId();
-            KhachHang kh = KhachHang.builder().id(idKh).build();
-            GioHang _gioHang = GioHang.builder().khachHang(kh).build();
-//            GioHang gh = gioHangRespon.save(_gioHang);
-//            gioHangCTRespon.createGioHangCT(idSanPHamCT, gh.getId(), soLuong);
-        }
-
-    }
-
-    public HashMap<String, Object> addCart(Integer id, Integer soLuong, Principal principal) {
+    public List<?> getAll(HttpSession httpSession) {
         Integer idKh;
         if (authenticationService.getCurrentLoginId() != null) {
             idKh = authenticationService.getCurrentLoginId();
@@ -86,9 +52,43 @@ public class CartDetailServiceImpl implements CartDetailService {
             idKh = loginGoogleService.getIdUser();
         }
         if (idKh == null) {
-            HashMap<String, Object> map = DataUltil.setData("error", "vui lòng đăng nhập");
+            Cart cart = (Cart) httpSession.getAttribute("cart");
+            if (cart != null) {
+                listGioHang = cart.getItems();
+            }
+        } else {
+            listGioHang = gioHangCTRespon.findAllByTen(idKh);
+            Cart cart = (Cart) httpSession.getAttribute("cart");
+            if (cart != null) {
+//                KhachHang kh = KhachHang.builder().id(idKh).build();
+//                GioHang gh = GioHang.builder().khachHang(kh).build();
+//                List<GioHangChiTiet> liss = cart.getItems();
+//                liss.forEach(o->o.setGioHang(gh));
+                listGioHang.addAll(cart.getItems());
+//                listGioHang.forEach(o->o.getGioHang().getId());
+            }
+        }
+
+        return listGioHang;
+
+    }
+
+    public HashMap<String, Object> addCart(Integer id, Integer soLuong, HttpSession httpSession) {
+        Integer idKh;
+        if (authenticationService.getCurrentLoginId() != null) {
+            idKh = authenticationService.getCurrentLoginId();
+        } else {
+            idKh = loginGoogleService.getIdUser();
+        }
+        if (idKh == null) {
+            HashMap<String, Object> map = this.addCartSession(id, soLuong, httpSession);
             return map;
         }
+        HashMap<String, Object> map = this.addCartDataBase(id, soLuong, idKh);
+        return map;
+    }
+
+    public HashMap<String, Object> addCartDataBase(Integer id, Integer soLuong, Integer idKh) {
         ChiTietSanPham sanPham = productReponstory.getById(id);
         if (soLuong > sanPham.getSoLuongTon()) {
             HashMap<String, Object> map = DataUltil.setData("error", "số lượng sản phẩm không đủ");
@@ -124,6 +124,41 @@ public class CartDetailServiceImpl implements CartDetailService {
         }
     }
 
+    public HashMap<String, Object> addCartSession(Integer id, Integer soLuong, HttpSession httpSession) {
+        // lấy ctsp từ repo
+        Optional<ChiTietSanPham> chiTietSanPham = productReponstory.findById(id);
+        // tạo ra giỏ hàng chi tiết
+        GioHangChiTiet gioHang = GioHangChiTiet.builder().chiTietSP(chiTietSanPham.get()).soLuong(soLuong).ngayTao(DatetimeUtil.getCurrentDate()).build();
+        //lấy gior hàng từ session
+        Cart cartSesion = (Cart) httpSession.getAttribute("cart");
+        // nếu chưa có giỏ hàng
+        if (cartSesion == null) {
+            Cart cart = new Cart();
+            List<GioHangChiTiet> list = new ArrayList<>();
+            list.add(gioHang);
+            cart.setItems(list);
+            httpSession.setAttribute("cart", cart);
+//                list.forEach(item1 -> System.out.println(item1.getIdCtsp()));
+        } else {
+            // nếu có giỏ hàng
+            Cart cart = (Cart) httpSession.getAttribute("cart");
+            List<GioHangChiTiet> listItem = cart.getItems();
+            // kieemr tra sản phẩm đã có trong giỏ hàng chưa
+            // nếu có thì tăng số lwonjg lên 1
+            for (GioHangChiTiet itemTmp : listItem) {
+                if (itemTmp.getChiTietSP().getId().equals(id)) {
+                    itemTmp.setSoLuong(gioHang.getSoLuong() + soLuong);
+                    HashMap<String, Object> map = DataUltil.setData("error", "thêm thành công");
+                    return map;
+                }
+            }
+            // không có thì thêm sản phẩm vào
+            listItem.add(gioHang);
+//                listItem.forEach(item1 -> System.out.println(item1.getIdCtsp()));
+        }
+        HashMap<String, Object> map = DataUltil.setData("error", "thêm thành công");
+        return map;
+    }
 
     public Optional<GioHangChiTiet> getById(Integer id, Integer idsp) {
         return gioHangCTRespon.findById(id, idsp);

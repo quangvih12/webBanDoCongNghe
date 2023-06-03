@@ -3,6 +3,7 @@ package com.example.demo.rescontroller;
 
 import com.example.demo.entity.GioHangChiTiet;
 import com.example.demo.service.impl.CartDetailServiceImpl;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,9 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.security.Principal;
 import java.util.HashMap;
-import java.util.List;
 
 
 @RestController
@@ -29,15 +28,8 @@ public class CartDetailResController {
 
     // get all
     @GetMapping("/getAll")
-    public ResponseEntity<List<GioHangChiTiet>> getAll() {
-        return cartDetailService.getAll();
-    }
-
-    // them san pham vao gio hang
-    @PostMapping("/create")
-    public void createGioHangCT(@RequestParam Integer idSanPHamCT,
-                                @RequestParam Integer soLuong) {
-        cartDetailService.createGioHangCT(idSanPHamCT, soLuong);
+    public ResponseEntity<?> getAll(HttpSession httpSession) {
+        return ResponseEntity.ok(cartDetailService.getAll(httpSession));
     }
 
     // xoa khoi gio hang theo id
@@ -67,8 +59,8 @@ public class CartDetailResController {
 
     @PostMapping("/add")
     public ResponseEntity<?> addCart(@RequestParam Integer idSanPHamCT,
-                                     @RequestParam Integer soLuong, Principal principal) {
-        HashMap<String, Object> map = cartDetailService.addCart(idSanPHamCT, soLuong, principal);
+                                     @RequestParam Integer soLuong, HttpSession httpSession) {
+        HashMap<String, Object> map = cartDetailService.addCart(idSanPHamCT, soLuong, httpSession);
         return ResponseEntity.ok(map);
     }
 
