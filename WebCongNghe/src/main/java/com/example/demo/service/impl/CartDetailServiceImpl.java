@@ -135,7 +135,12 @@ public class CartDetailServiceImpl implements CartDetailService {
         // lấy ctsp từ repo
         Optional<ChiTietSanPham> chiTietSanPham = productReponstory.findById(id);
         // tạo ra giỏ hàng chi tiết
-        GioHangChiTiet gioHang = GioHangChiTiet.builder().chiTietSP(chiTietSanPham.get()).soLuong(soLuong).ngayTao(DatetimeUtil.getCurrentDate()).build();
+        GioHangChiTiet gioHang = GioHangChiTiet.builder()
+                .chiTietSP(chiTietSanPham.get())
+                .donGia(chiTietSanPham.get().getGiaBan())
+                .soLuong(soLuong)
+                .ngayTao(DatetimeUtil.getCurrentDate())
+                .build();
         //lấy gior hàng từ session
         Cart cartSesion = (Cart) httpSession.getAttribute("cart");
         // nếu chưa có giỏ hàng
