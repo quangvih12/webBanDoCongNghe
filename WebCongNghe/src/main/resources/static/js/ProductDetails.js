@@ -10,28 +10,28 @@ window.detailController = function ($scope, $http, $routeParams) {
 
     // them sp vao gio hang
     $scope.createGioHangCT = function (idSp) {
-        // alert(parseInt(sq) + 1)
-        if ($scope.soLuong <= 0) {
-            $("#modal_sanP").modal('show');
-        } else if ($scope.soLuong == null) {
-            $("#modal_sanP").modal('show');
-        } else {
-            $http.post("http://localhost:8080/api/gioHang/add" + "?soLuong=" + $scope.soLuong + "&idSanPHamCT=" + idSp).then(function (response) {
-                if (response.status === 200) {
-                    if (response.data.statusCode == "error") {
-                        swal.fire({
-                            icon: 'success',
-                            title: response.data.data
-                        })
-                            .then((value) => {
-                                window.open("/view#/home", '_self');
-                            });
-                    }
+        $http.post("http://localhost:8080/api/gioHang/add" + "?soLuong=" + $scope.soLuong + "&idSanPHamCT=" + idSp).then(function (response) {
+            if (response.status === 200) {
+                if (response.data.statusCode == "error") {
+                    swal.fire({
+                        icon: 'error',
+                        title: response.data.data
+                    })
+                        .then((value) => {
+                            window.open("/view#/detail/"+idSp, '_self');
+                        });
+                } else if (response.data.statusCode == "success") {
+                    swal.fire({
+                        icon: 'success',
+                        title: response.data.data
+                    })
+                        .then((value) => {
+                            window.open("/view#/detail/"+idSp, '_self');
+                        });
                 }
+            }
 
-            });
-        }
-
+        });
     };
 
 

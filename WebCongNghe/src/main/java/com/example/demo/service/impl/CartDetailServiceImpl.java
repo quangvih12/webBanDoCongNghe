@@ -7,6 +7,7 @@ import com.example.demo.entity.GioHangChiTiet;
 import com.example.demo.entity.KhachHang;
 import com.example.demo.reponstory.CartDetailReponsitory;
 import com.example.demo.reponstory.CartsReponstory;
+import com.example.demo.reponstory.KhachHangReponsitory;
 import com.example.demo.reponstory.ProductReponstory;
 import com.example.demo.service.CartDetailService;
 import com.example.demo.util.DataUltil;
@@ -28,9 +29,11 @@ public class CartDetailServiceImpl implements CartDetailService {
     @Autowired
     private CartDetailReponsitory gioHangCTRespon;
 
-
     @Autowired
     private CartsReponstory cartsReponstory;
+
+    @Autowired
+    private KhachHangReponsitory khachHangReponsitory;
 
     @Autowired
     private AuthenticationServiceImpl authenticationService;
@@ -40,6 +43,7 @@ public class CartDetailServiceImpl implements CartDetailService {
 
     @Autowired
     private ProductReponstory productReponstory;
+
     private List<GioHangChiTiet> listGioHang = new ArrayList<>();
 
     @Override
@@ -58,19 +62,17 @@ public class CartDetailServiceImpl implements CartDetailService {
             }
         } else {
             listGioHang = gioHangCTRespon.findAllByTen(idKh);
-            Cart cart = (Cart) httpSession.getAttribute("cart");
-            if (cart != null) {
-//                KhachHang kh = KhachHang.builder().id(idKh).build();
-//                GioHang gh = GioHang.builder().khachHang(kh).build();
+//            Cart cart = (Cart) httpSession.getAttribute("cart");
+//            if (cart != null) {
 //                List<GioHangChiTiet> liss = cart.getItems();
-//                liss.forEach(o->o.setGioHang(gh));
-                listGioHang.addAll(cart.getItems());
-//                listGioHang.forEach(o->o.getGioHang().getId());
-            }
+//                liss.forEach(o -> {
+////                    o.setGioHang(gh);
+//                    System.out.println(o.getGioHang().getId());
+//                });
+//                listGioHang.addAll(liss);
+//            }
         }
-
         return listGioHang;
-
     }
 
     public HashMap<String, Object> addCart(Integer id, Integer soLuong, HttpSession httpSession) {
@@ -93,6 +95,10 @@ public class CartDetailServiceImpl implements CartDetailService {
         if (soLuong > sanPham.getSoLuongTon()) {
             HashMap<String, Object> map = DataUltil.setData("error", "số lượng sản phẩm không đủ");
             return map;
+        }
+        if (soLuong <= 0) {
+            HashMap<String, Object> map = DataUltil.setData("error", "số lượng sản phẩm không đủ điều kiện (số lượng > 0)");
+            return map;
         } else {
             KhachHang kh = KhachHang.builder().id(idKh).build();
             GioHang _gioHang = GioHang.builder().khachHang(kh).build();
@@ -105,11 +111,12 @@ public class CartDetailServiceImpl implements CartDetailService {
                 } else {
                     gioHangChiTiet.setSoLuong(soLuong + gioHangChiTiet.getSoLuong());
                     gioHangCTRespon.save(gioHangChiTiet);
-                    HashMap<String, Object> map = DataUltil.setData("error", "thêm thành công");
+                    HashMap<String, Object> map = DataUltil.setData("success", "thêm thành công");
                     return map;
                 }
             } else {
                 GioHang gh = cartsReponstory.save(_gioHang);
+                gh.setMa("HD" + gh.getId());
                 GioHangChiTiet gioHangChiTiet = GioHangChiTiet.builder()
                         .soLuong(soLuong)
                         .gioHang(gh)
@@ -118,7 +125,7 @@ public class CartDetailServiceImpl implements CartDetailService {
                         .ngayTao(DatetimeUtil.getCurrentDate())
                         .build();
                 gioHangCTRespon.save(gioHangChiTiet);
-                HashMap<String, Object> map = DataUltil.setData("error", "thêm thành công");
+                HashMap<String, Object> map = DataUltil.setData("success", "thêm thành công");
                 return map;
             }
         }
@@ -138,25 +145,23 @@ public class CartDetailServiceImpl implements CartDetailService {
             list.add(gioHang);
             cart.setItems(list);
             httpSession.setAttribute("cart", cart);
-//                list.forEach(item1 -> System.out.println(item1.getIdCtsp()));
         } else {
             // nếu có giỏ hàng
             Cart cart = (Cart) httpSession.getAttribute("cart");
             List<GioHangChiTiet> listItem = cart.getItems();
             // kieemr tra sản phẩm đã có trong giỏ hàng chưa
-            // nếu có thì tăng số lwonjg lên 1
+            // nếu có thì tăng số lượng lên theo so luong nhap
             for (GioHangChiTiet itemTmp : listItem) {
                 if (itemTmp.getChiTietSP().getId().equals(id)) {
                     itemTmp.setSoLuong(gioHang.getSoLuong() + soLuong);
-                    HashMap<String, Object> map = DataUltil.setData("error", "thêm thành công");
+                    HashMap<String, Object> map = DataUltil.setData("success", "thêm thành công");
                     return map;
                 }
             }
             // không có thì thêm sản phẩm vào
             listItem.add(gioHang);
-//                listItem.forEach(item1 -> System.out.println(item1.getIdCtsp()));
         }
-        HashMap<String, Object> map = DataUltil.setData("error", "thêm thành công");
+        HashMap<String, Object> map = DataUltil.setData("success", "thêm thành công");
         return map;
     }
 
@@ -169,7 +174,9 @@ public class CartDetailServiceImpl implements CartDetailService {
     // xoa khoi gio hang theo id
     public ResponseEntity<HttpStatus> deleteGioHangCT(Integer id) {
         try {
-            gioHangCTRespon.deleteById(id);
+            GioHangChiTiet gioHangChiTiet = gioHangCTRespon.findById(id).get();
+            gioHangCTRespon.deleteById(gioHangChiTiet.getId());
+            cartsReponstory.deleteById(gioHangChiTiet.getGioHang().getId());
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
