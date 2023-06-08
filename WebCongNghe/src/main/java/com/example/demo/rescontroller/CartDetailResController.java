@@ -46,7 +46,7 @@ public class CartDetailResController {
 
     @PutMapping("/gioHangs/{id}")
     public ResponseEntity<?> updateCongSoLuong(@PathVariable("id") Integer id, @RequestBody GioHangChiTiet gioHangChiTiet) {
-        HashMap<String, Object> map = cartDetailService.updateTruSoLuong(id);
+        HashMap<String, Object> map = cartDetailService.updateCongSoLuong(id);
         return ResponseEntity.ok(map);
     }
 

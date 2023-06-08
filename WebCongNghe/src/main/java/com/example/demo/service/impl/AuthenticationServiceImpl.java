@@ -106,7 +106,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 o.setGioHang(gh);
 //                System.out.println(o.getGioHang().getId());
             });
-//            gioHangCTRespon.saveAll(liss);
+            gioHangCTRespon.saveAll(liss);
+            session.removeAttribute("cart");
 //            ChiTietSanPham sanPham = productReponstory.getById();
 //            Optional<GioHangChiTiet> optional = this.getById(kh.getId(), sanPham.getId());
 //            if (optional.isPresent()) {
